@@ -55,6 +55,25 @@
           </div>
         </div>
       </div>
+      <div class="room-list-warrper">
+        <roomlist></roomlist>
+      </div>
+    </div>
+    <div class="footer">
+      <mt-tabbar v-model="selected">
+        <mt-tab-item id="首页">
+          <img slot="icon" src="../../assets/100x100.png">
+          首页
+        </mt-tab-item>
+        <mt-tab-item id="消息">
+          <img slot="icon" src="../../assets/100x100.png">
+          消息
+        </mt-tab-item>
+        <mt-tab-item id="我的">
+          <img slot="icon" src="../../assets/100x100.png">
+          我的
+        </mt-tab-item>
+      </mt-tabbar>
     </div>
   </div>
 </template>
@@ -65,6 +84,7 @@ import CardInfo from '@/components/cardinfo'
 import huodong from '@/views/sales'
 import HotSale from '@/views/sales/salespromotion/hotsales'
 import InfoDetail from '@/views/infodetail'
+import roomlist from '@/views/roomlist'
   export default {
   name:'',
   components:{
@@ -72,7 +92,8 @@ import InfoDetail from '@/views/infodetail'
     huodong,
     HotSale,
     InfoDetail,
-    CardInfo
+    CardInfo,
+    roomlist
    },
   data(){
      return{
@@ -155,5 +176,16 @@ import InfoDetail from '@/views/infodetail'
       margin-top: 0.1rem;
     }
   }
-
+.room-list-warrper{
+  margin-top: 15px;
+}
+  .footer{
+    position:fixed;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    .mint-tabbar{
+      background-image:none;
+    }
+  }
 </style>
