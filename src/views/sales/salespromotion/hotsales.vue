@@ -2,12 +2,13 @@
  <div class="warpper">
    <div class="title">热门活动</div>
    <div class="hot-container">
-     <mt-swipe :show-indicators="false" >
+     <mt-swipe :show-indicators="false" :auto="0">
        <mt-swipe-item>
          <div class="item-box">
            <div class="item-img">
              <div class="img-container">
                <img :src="hotSales" alt="">
+               <div class="mask"></div>
              </div>
              <span class="info-title">
                专业大咖置业分享会
@@ -16,6 +17,7 @@
            <div class="item-img">
              <div class="img-container">
                <img :src="hotSales" alt="">
+               <div class="mask"></div>
              </div>
              <span class="info-title">
                专业大咖置业分享会
@@ -49,6 +51,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+
   export default {
   name:'',
   components:{
@@ -70,6 +73,7 @@
   }
 </script>
 <style scoped lang="scss" rel="stylesheet/scss">
+  @import '../../../styles/variables.scss';
   .warpper{
   }
   .title{
@@ -103,7 +107,7 @@
     }
     .img-container{
       position: relative;
-      &::before{
+/*      &::before{
         position: absolute;
         display: table;
         content: "";
@@ -112,7 +116,17 @@
         height: 1.5rem;
         opacity: .2;
         background-color: #000;
-      }
+      }*/
+    }
+    .mask{
+      width: 100%;
+      height: 1.5rem;
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      background-color: $black;
+      opacity: .2;
     }
     .info-title{
       position: absolute;

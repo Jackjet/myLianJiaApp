@@ -2,36 +2,36 @@
   <swiper :options="swiperOption"  ref="mySwiper"  class="swiper-container">
     <swiper-slide v-for="(slide,index) in swiperSlides" :key="index"  class="swiper-slide link-container">
       <div class="item-link">
-        <icon name="flag"></icon>
-        <span class="link-title">标题</span>
+        <icon name="home"></icon>
+        <span class="link-title">二手房</span>
+      </div>
+      <div class="item-link">
+        <icon name="tachometer"></icon>
+        <span class="link-title">新房</span>
       </div>
       <div class="item-link">
         <icon name="flag"></icon>
-        <span class="link-title">标题</span>
+        <span class="link-title">租房</span>
       </div>
       <div class="item-link">
-        <icon name="flag"></icon>
-        <span class="link-title">标题</span>
+        <icon name="map"></icon>
+        <span class="link-title">海外</span>
       </div>
       <div class="item-link">
-        <icon name="flag"></icon>
-        <span class="link-title">标题</span>
+        <icon name="plane"></icon>
+        <span class="link-title">旅居</span>
       </div>
       <div class="item-link">
-        <icon name="flag"></icon>
-        <span class="link-title">标题</span>
+        <icon name="soccer-ball-o"></icon>
+        <span class="link-title">环京区域</span>
       </div>
       <div class="item-link">
-        <icon name="flag"></icon>
-        <span class="link-title">标题</span>
+        <icon name="map-marker"></icon>
+        <span class="link-title">地图找房</span>
       </div>
       <div class="item-link">
-        <icon name="flag"></icon>
-        <span class="link-title">标题</span>
-      </div>
-      <div class="item-link">
-        <icon name="flag"></icon>
-        <span class="link-title">标题</span>
+        <icon name="delicious"></icon>
+        <span class="link-title">小区</span>
       </div>
       </swiper-slide>
     <div class="swiper-pagination swiper-pagination-center" slot="pagination"></div>
@@ -82,8 +82,10 @@
       flex: 0 0 25%;
       align-self:center;
       text-align: center;
+      margin-bottom: 10px;
     }
     .fa-icon{
+      width: .7rem;
       color:$blue;
     }
     .link-title{

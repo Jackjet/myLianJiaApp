@@ -1,0 +1,19 @@
+@import './variables.scss';
+
+.search-wrapper .mint-searchbar{
+  background-color: $bg-grey;
+}
+
+.search-wrapper .mint-searchbar-inner{
+  font-size: 12px;
+}
+.mint-searchbar-inner,.mint-searchbar-core{
+  background-color: $bg-grey;
+}
+.mint-searchbar-cancel{
+  font-size: 12px ;
+}
+.mint-tabbar > .mint-tab-item.is-selected {
+  background-color: #fafafa;
+  color: #26a2ff;
+}

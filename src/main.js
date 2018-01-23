@@ -5,6 +5,7 @@ import 'vue-awesome/icons'
 
 import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
+import './styles/mymintui.scss';
 Vue.use(Mint)
 
 
