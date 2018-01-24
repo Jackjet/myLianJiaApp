@@ -2,35 +2,35 @@
   <swiper :options="swiperOption"  ref="mySwiper"  class="swiper-container">
     <swiper-slide v-for="(slide,index) in swiperSlides" :key="index"  class="swiper-slide link-container">
       <div class="item-link">
-        <icon name="home"></icon>
+        <icon name="home" class="ershoufang"></icon>
         <span class="link-title">二手房</span>
       </div>
       <div class="item-link">
-        <icon name="tachometer"></icon>
+        <icon name="tachometer"  class="xinfang"></icon>
         <span class="link-title">新房</span>
       </div>
       <div class="item-link">
-        <icon name="flag"></icon>
+        <icon name="flag"  class="zufang"></icon>
         <span class="link-title">租房</span>
       </div>
       <div class="item-link">
-        <icon name="map"></icon>
+        <icon name="map"  class="haiwai"></icon>
         <span class="link-title">海外</span>
       </div>
       <div class="item-link">
-        <icon name="plane"></icon>
+        <icon name="plane"  class="luju"></icon>
         <span class="link-title">旅居</span>
       </div>
       <div class="item-link">
-        <icon name="soccer-ball-o"></icon>
+        <icon name="soccer-ball-o"  class="hjqy"></icon>
         <span class="link-title">环京区域</span>
       </div>
       <div class="item-link">
-        <icon name="map-marker"></icon>
+        <icon name="map-marker"  class="dtzf"></icon>
         <span class="link-title">地图找房</span>
       </div>
       <div class="item-link">
-        <icon name="delicious"></icon>
+        <icon name="delicious"  class="xq"></icon>
         <span class="link-title">小区</span>
       </div>
       </swiper-slide>
@@ -83,10 +83,35 @@
       align-self:center;
       text-align: center;
       margin-bottom: 10px;
+      color: $text2;
     }
     .fa-icon{
       width: .7rem;
       color:$blue;
+    }
+    .ershoufang{
+      color:#00c482;
+    }
+    .xinfang{
+      color:#ff8957;
+    }
+    .zufang{
+      color:#fdb257;
+    }
+    .haiwai{
+      color:#4aa0ff;
+    }
+    .luju{
+      color:#2ac1e6;
+    }
+    .hjqy{
+      color:#f7776a;
+    }
+    .dtzf{
+      color:#e6c053;
+    }
+    .xq{
+      color:#25bfa7;
     }
     .link-title{
       display: block;

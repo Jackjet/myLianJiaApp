@@ -12,7 +12,8 @@
          v-for="item in result"
          :title="item"
          :value="item"
-         :to="{item}"
+         to="//github.com"
+         is-link
        >
        </mt-cell>
      </mt-search>

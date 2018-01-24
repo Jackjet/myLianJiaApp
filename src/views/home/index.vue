@@ -5,8 +5,8 @@
     </div>
     <div class="banner">
       <mt-swipe :auto="3000">
-        <mt-swipe-item><img :src="bannerSrc" alt=""></mt-swipe-item>
-        <mt-swipe-item><img :src="bannerSrc2" alt=""></mt-swipe-item>
+        <mt-swipe-item><img  v-lazy="bannerSrc" alt=""></mt-swipe-item>
+        <mt-swipe-item><img  v-lazy="bannerSrc2" alt=""></mt-swipe-item>
       </mt-swipe>
     </div>
       <div class="swiper-container">
@@ -124,6 +124,9 @@ import HotSale from '@/views/sales/salespromotion/hotsales'
 import InfoDetail from '@/views/infodetail'
 import roomlist from '@/views/roomlist'
 import search from '@/views/search'
+
+import {citySearch} from '@/api/remoteSearch'
+
   export default {
   name:'',
   components:{
@@ -139,6 +142,7 @@ import search from '@/views/search'
      return{
        title:'新房优选',
        bannerSrc:'',
+       searchQuery:'广州',
        bannerSrc2:'',
        paddingLeft:20,
        searchTop:0.3,
@@ -171,6 +175,7 @@ import search from '@/views/search'
    created(){
     this.bannerSrc = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516783212&di=19d442daabf99b8f22e2c961a17e2bfc&imgtype=jpg&er=1&src=http%3A%2F%2Fpic.90sjimg.com%2Fback_pic%2Fqk%2Fback_origin_pic%2F00%2F02%2F82%2F00618b2a20cbc87ce2d70f8331eff41c.jpg',
       this.bannerSrc2 = 'http://img1.imgtn.bdimg.com/it/u=2573276400,2181455435&fm=27&gp=0.jpg'
+     this.searchCitys()
    },
    mounted(){
      // 原搜索组件默认有个列表占宽，需要去掉
@@ -215,6 +220,11 @@ import search from '@/views/search'
      listnerInput(val){
        // 正确的通过子组件传值过来，而不是通过dom来取值
        this.searchValue = val
+     },
+     searchCitys(){
+       citySearch(this.searchQuery).then(res=>{
+         console.log(res.data.items)
+       })
      }
    },
     watch:{

@@ -22,9 +22,19 @@
          <span class="sub-titile">
            {{subtitile}}
          </span>
-         <span class="zujin">
+         <div class="btn-groups">
+           <sbadege size="small" type="error">满5年</sbadege>
+           <sbadege size="small" type="success">随时可看</sbadege>
+           <sbadege size="small">地铁</sbadege>
+         </div>
+         <div class="zj-warpper">
+           <span class="zujin">
            {{zujin}}
          </span>
+           <span class="mianji">
+           {{mianji}}
+         </span>
+         </div>
        </div>
      </div>
    </div>
@@ -32,16 +42,19 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import sbadege from '@/components/sbadege'
   const imgSrc= "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3739955964,2895168016&fm=27&gp=0.jpg";
   export default {
   name:'',
   components:{
+    sbadege
    },
   data(){
      return{
        subtitile:"63.5/南低楼层共9层",
        isActive:true,
-       zujin:"666元/月",
+       zujin:"666万",
+       mianji:"3,8888元/平",
        imgSrc:"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=579250810,1396895258&fm=27&gp=0.jpg",
        roomTitle:"广园新村云婉三街 2室1厅",
        roomList:[
@@ -77,6 +90,7 @@
 </script>
 <style scoped lang="scss" rel="stylesheet/scss">
   @import '../../styles/variables.scss';
+  @import '../../styles/mixin.scss';
   .room-warpper{
     margin-bottom: 50px;
   }
@@ -103,12 +117,14 @@
   }
   .list-item{
     display: flex;
+    margin:12px 0 12px 0;
+    @include border-1px($line);
     .img{
       flex: 0 0 100px;
       width: 100px;
       img{
         border:none;
-        height: 80px;
+        height: 86px;
         width: 100px;
       }
     }
@@ -120,17 +136,26 @@
     align-items: flex-start;
     flex: 1;
     overflow: hidden;
-    line-height: 24px;
+    line-height: 22px;
     .header{
-      font-size: 14px;
+      color: $black;
+      font-size: 16px;
     }
     .sub-titile{
       font-size: 10px;
       color:$text;
     }
+    .zj-warpper,.btn-groups{
+      font-size: 0;
+    }
     .zujin{
-      font-size: 12px;
+      font-size: 14px;
       color:$red;
+    }
+    .mianji{
+      margin-left: 5px;
+      font-size: 12px;
+      color: $text;
     }
   }
 </style>

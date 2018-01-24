@@ -28,25 +28,3 @@ npm run build --report
 
 如何修改Mint Ui的默认样式(styles/mymintui.scss)
 https://segmentfault.com/a/1190000011647319
-<mt-tabbar >
-        <mt-tab-item id="首页">
-          <icon name="home"></icon>
-          首页
-        </mt-tab-item>
-        <mt-tab-item id="消息">
-          <icon name="info-circle"></icon>
-          消息
-        </mt-tab-item>
-        <mt-tab-item id="发现">
-          <icon name="compass"></icon>
-          发现
-        </mt-tab-item>
-        <mt-tab-item id="看房">
-          <icon name="institution"></icon>
-          看房
-        </mt-tab-item>
-        <mt-tab-item id="我的">
-          <icon name="user"></icon>
-          我的
-        </mt-tab-item>
-      </mt-tabbar>

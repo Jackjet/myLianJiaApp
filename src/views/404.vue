@@ -40,15 +40,15 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
 .wscn-http404 {
   position: relative;
-  width: 1200px;
+  width: 100%;
   margin: 20px auto 60px;
   padding: 0 100px;
   overflow: hidden;
   .pic-404 {
     position: relative;
     float: left;
-    width: 600px;
-    padding: 150px 0;
+    width: 5rem;
+    padding: 50px 0;
     overflow: hidden;
     &__parent {
       width: 100%;
