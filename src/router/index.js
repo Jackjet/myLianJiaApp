@@ -33,7 +33,12 @@ export const constantRouterMap = [
       component: () => import('@/views/home/index')
     }]
   },
-
+  {
+    path: '/querylist',
+    name: 'querylist',
+    component: () => import('@/views/querylist/index'),
+    meta: { title: 'querylist'}
+  },
   {
     path: '/example',
     component: Layout,

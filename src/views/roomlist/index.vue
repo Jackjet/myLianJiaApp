@@ -5,34 +5,34 @@
        猜你喜欢
      </div>
      <div class="select-query item2">
-       <div class="item" :class="{ active: isActive }">二手房</div>
-       <div class="item">新房</div>
-       <div class="item">租房</div>
+       <div class="item" v-for="(item,index) in selectQuery" :key="index"
+            :class="{ active: isActive === index }"
+            @click.stop="selectTypeRoom(item,index)">{{item}}</div>
      </div>
    </div>
    <div class="list">
-     <div class="list-item" v-for="(item,index) in roomList" :key="index">
+     <div class="list-item" v-for="(item,index) in dataList" :key="index">
        <div class="img">
-         <img :src="item.itemImgSrc" >
+         <img v-lazy="item.img" >
        </div>
        <div class="list-info">
          <header class="header">
-           {{roomTitle}}
+           {{item.title}}
          </header>
          <span class="sub-titile">
-           {{subtitile}}
+           {{item.subtitile}}
          </span>
          <div class="btn-groups">
-           <sbadege size="small" type="error">满5年</sbadege>
-           <sbadege size="small" type="success">随时可看</sbadege>
-           <sbadege size="small">地铁</sbadege>
+           <sbadege size="small" type="error" v-if="item.tag.full">满5年</sbadege>
+           <sbadege size="small" type="success" v-if="item.tag.randomTime">随时可看</sbadege>
+           <sbadege size="small" v-if="item.tag.trace">地铁</sbadege>
          </div>
          <div class="zj-warpper">
            <span class="zujin">
-           {{zujin}}
+           {{item.totalPrice}}
          </span>
            <span class="mianji">
-           {{mianji}}
+           {{item.price}}
          </span>
          </div>
        </div>
@@ -43,39 +43,22 @@
 
 <script type="text/ecmascript-6">
   import sbadege from '@/components/sbadege'
-  const imgSrc= "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3739955964,2895168016&fm=27&gp=0.jpg";
   export default {
   name:'',
   components:{
     sbadege
    },
+  props:{
+    dataList:{
+      type:Array,
+      deafault:[]
+    }
+  },
   data(){
      return{
        subtitile:"63.5/南低楼层共9层",
-       isActive:true,
-       zujin:"666万",
-       mianji:"3,8888元/平",
-       imgSrc:"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=579250810,1396895258&fm=27&gp=0.jpg",
-       roomTitle:"广园新村云婉三街 2室1厅",
-       roomList:[
-         {
-         test:'000',
-         itemImgSrc:imgSrc,
-
-         },
-         {
-           test:'000',
-           itemImgSrc:imgSrc
-         },
-         {
-           test:'000',
-           itemImgSrc:imgSrc
-         },
-         {
-           test:'000',
-           itemImgSrc:imgSrc
-         },
-       ]
+       isActive:0,
+       selectQuery:['二手房','新房','租房']
      }
    },
    created(){
@@ -85,6 +68,10 @@
    computed: {
    },
    methods: {
+     selectTypeRoom(item,index){
+       this.isActive = index
+       this.$emit("changeType",item)
+     }
    }
   }
 </script>
@@ -112,6 +99,7 @@
       .item{
         flex: 1;
         flex: 0 0 33%;
+        text-align: center;
       }
     }
   }

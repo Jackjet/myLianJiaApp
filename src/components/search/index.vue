@@ -7,13 +7,14 @@
      </div>
    </div>
    <div class="search-item">
-     <mt-search @input=listnerInput  v-model="value" :result.sync="result" placeholder="你想住在哪?">
+     <mt-search @input=listnerInput  v-model="value" :result.sync="result" placeholder="你想住在哪?(北上广深)">
        <mt-cell
          v-for="item in result"
-         :title="item"
-         :value="item"
-         to="//github.com"
+         :title="item.discription"
+         :value="item.num"
+         to="/querylist"
          is-link
+         :key="item.id"
        >
        </mt-cell>
      </mt-search>
@@ -63,11 +64,12 @@
   }
 </script>
 <style scoped lang="scss" rel="stylesheet/scss">
-  @import '../../styles/variables.scss';
+  @import '../../styles/variables';
 .search-wrapper{
   display: flex;
 }
   .search-location{
+    z-index: 1;
     padding:0 10px;
     height: 44px;
     line-height: 44px;

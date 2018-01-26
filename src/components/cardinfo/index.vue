@@ -3,61 +3,18 @@
     <div class="title">{{title}}</div>
     <div class="card-container">
       <mt-swipe :auto=number >
-        <mt-swipe-item>
+        <mt-swipe-item v-for="(item,index) in cardData" :key="index">
           <div class="item-box">
-            <div class="item-img">
+            <div class="item-img"  v-for="(subItem,subIndex) in item.card">
               <div class="img-container">
-                <img :src="hotSales" alt="">
+                <img :src="subItem.img" >
               </div>
               <div class="info-titile-wrraper">
                 <span class="info-title">
-                  {{textInfo}}
+                  {{subItem.textInfo}}
                 </span>
                 <span class="sub-title">
-                   {{subInfo}}
-                 </span>
-              </div>
-            </div>
-            <div class="item-img">
-              <div class="img-container">
-                <img :src="hotSales" alt="">
-              </div>
-              <div class="info-titile-wrraper">
-                <span class="info-title">
-                  {{textInfo}}
-                </span>
-                <span class="sub-title">
-                   {{subInfo}}
-                 </span>
-              </div>
-            </div>
-          </div>
-        </mt-swipe-item>
-        <mt-swipe-item>
-          <div class="item-box">
-            <div class="item-img">
-              <div class="img-container">
-                <img :src="hotSales2" alt="">
-              </div>
-              <div class="info-titile-wrraper">
-                <span class="info-title">
-                  {{textInfo}}
-                </span>
-                <span class="sub-title">
-                   {{subInfo}}
-                 </span>
-              </div>
-            </div>
-            <div class="item-img">
-              <div class="img-container">
-                <img :src="hotSales2" alt="">
-              </div>
-              <div class="info-titile-wrraper">
-                <span class="info-title">
-                  {{textInfo}}
-                </span>
-                <span class="sub-title">
-                   {{subInfo}}
+                   {{subItem.subInfo}}
                  </span>
               </div>
             </div>
@@ -77,6 +34,9 @@
       title: {
         type: String,
         default: ''
+      },
+      cardData:{
+        default:''
       },
       textInfo: {
         type: String,
@@ -145,15 +105,24 @@
     .info-titile-wrraper{
       text-align: left;
     }
+    // 超出省略号显示http://www.daqianduan.com/6179.html
     .info-title{
       display: block;
       font-size: 16px;
       margin-bottom: 5px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
     }
     .sub-title{
       display: block;
       font-size: 12px;
       color:$text;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
     }
   }
 </style>

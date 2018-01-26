@@ -7,3 +7,4 @@ export function citySearch(city) {
     params: { city }
   })
 }
+

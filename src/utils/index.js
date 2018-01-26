@@ -33,7 +33,19 @@ export function parseTime(time, cFormat) {
   })
   return time_str
 }
+export function debounce(fun,delay) {
+  let timer
 
+  return function (...args) {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(() => {
+      func.apply(this, args)
+    }, delay)
+  }
+
+}
 export function param2Obj(url) {
   const search = url.split('?')[1]
   if (!search) {
