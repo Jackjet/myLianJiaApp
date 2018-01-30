@@ -1,13 +1,13 @@
 <template>
  <div class="search-wrapper">
-   <div class="search-location">
-     <div class="location">
+   <div class="search-location" v-if="showLocation">
+     <div class="location" >
        <div class="item">{{location}}</div>
        <div class="item-icon"><icon name="caret-down"></icon></div>
      </div>
    </div>
-   <div class="search-item">
-     <mt-search @input=listnerInput  v-model="value" :result.sync="result" placeholder="你想住在哪?(北上广深)">
+   <div class="search-item" ref="searchcom">
+     <mt-search @input=listnerInput  v-model="value" :result.sync="result" placeholder="你想住在哪?(北上广深)" >
        <mt-cell
          v-for="item in result"
          :title="item.discription"
@@ -32,6 +32,10 @@
         type:String,
         default:''
       },
+      showLocation:{
+        type:Boolean,
+        defanult:true
+      },
       result:{
         type:Array,
         deafault:[]
@@ -47,20 +51,44 @@
     },
     data() {
       return {
-        value:this.oneresult
+        searchValue:'',
+        value:this.oneresult,
+        cancelFlage:''
       };
     },
    created(){
    },
     methods:{
       listnerInput(val){
+        this.searchValue = val
         this.$emit('input', val);
       }
     },
    mounted(){
-
+    this.listWrapper = this.$refs.searchcom.getElementsByClassName("mint-search")[0]
+    this.listWrapper.style.height = 100 +'%';
+    const cancelDom = this.$refs.searchcom.getElementsByClassName("mint-searchbar-cancel")[0]
+     cancelDom.onclick=()=>{
+       this.$emit("cancelSearch")
+     }
    },
-
+    watch:{
+     // 解决原框架组件搜索列表默认就占据整屏高度的问题
+      result(newR){
+        if(newR.length){
+          this.listWrapper.style.height = 100 +'%';
+          this.listWrapper.style.height = 100 +'vh';
+        }else{
+          this.listWrapper.style.height = 100 +'%';
+        }
+      },
+      searchValue(newV){
+        // 解决当删除搜索关键词时候，需要把列表高度置为正确
+        if(newV === ''|| newV===undefined){
+          this.listWrapper.style.height = 100 +'%';
+        }
+      }
+    }
   }
 </script>
 <style scoped lang="scss" rel="stylesheet/scss">

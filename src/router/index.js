@@ -40,6 +40,12 @@ export const constantRouterMap = [
     meta: { title: 'querylist'}
   },
   {
+    path: '/searchlist',
+    name: 'searchlist',
+    component: () => import('@/components/Searchlist/index'),
+    meta: { title: 'searchlist'}
+  },
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',

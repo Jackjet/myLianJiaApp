@@ -3,7 +3,9 @@
     <mt-tab-container v-model="selected">
       <mt-tab-container-item id="首页">
         <div class="h-serch"  ref="searchCom" :style="{paddingLeft:paddingLeft + 'px',paddingRight: paddingLeft + 'px',top:searchTop + 'rem'}">
-          <search  @input=listnerInput :result=searchtResult></search>
+          <router-link to="/searchlist">
+            <search></search>
+          </router-link>
         </div>
         <div class="banner">
           <mt-swipe :auto="3000">
