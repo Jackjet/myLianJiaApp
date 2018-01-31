@@ -2,12 +2,12 @@
   <div class="search-list" v-show="searches.length">
     <div class="history-text">
       <span>历史搜索</span>
-      <icon name="trash"  class="icon-delete"  @click.stop="deleteAll"></icon>
+      <icon name="trash"  class="icon-delete"  @click.native="deleteAll"></icon>
     </div>
     <transition-group name="list" tag="ul">
-      <li :key="item" class="search-item" @click="selectItem(item)" v-for="item in searches">
-        <span class="text">{{item}}</span>
-        <icon name="trash"  class="icon-delete"  @click.stop="deleteOne(item)"></icon>
+      <li :key="item" class="search-item"  v-for="item in searches">
+        <span class="text" @click.stop="selectItem(item)">{{item}}</span>
+        <icon name="trash"  class="icon-delete"  @click.native="deleteOne(item)"></icon>
       </li>
     </transition-group>
   </div>
@@ -27,6 +27,9 @@
       },
       deleteOne(item) {
         this.$emit('delete', item)
+      },
+      deleteAll(){
+        this.$emit('deleteAll')
       }
     }
   }
@@ -73,6 +76,8 @@
         font-size: $font-size-medium-x;
       }
       .icon-delete{
+        position: relative;
+        z-index: 9;
         font-size: $font-size-medium-x;
         color: $text2;
       }

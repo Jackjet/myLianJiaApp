@@ -12,15 +12,18 @@ for (let i = 0; i < count; i++) {
     discription:'@ctitle(6, 16)',
     num:'@natural(1, 188)'+'套',
     id: '@increment',
+    'houseType|1':['新房','二手房','租房'],
     timestamp: +Mock.Random.date('T')
   }))
 }
 export default {
   searchCity: config => {
-    const searchItem  = param2Obj(config.url)
-    const mockCityList = CityList.filter(item => {
-      const itemCity = item.city
-      if (itemCity && itemCity.indexOf(searchItem.city) < 0) return false
+    const {city,houseType}  = param2Obj(config.url)
+
+    let mockCityList = CityList.filter(item => {
+
+      if (houseType && item.houseType !== houseType) return false
+      if (city && city.indexOf(item.city) < 0) return false
       return true
     })
     return { items: mockCityList }

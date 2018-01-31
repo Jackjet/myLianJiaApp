@@ -4,7 +4,7 @@
       <mt-tab-container-item id="首页">
         <div class="h-serch"  ref="searchCom" :style="{paddingLeft:paddingLeft + 'px',paddingRight: paddingLeft + 'px',top:searchTop + 'rem'}">
           <router-link to="/searchlist">
-            <search></search>
+            <search :showLocation=true></search>
           </router-link>
         </div>
         <div class="banner">

@@ -6,7 +6,11 @@
       <slot name="left"></slot>
     </div>
     <div class="center-wrapper">
-      <slot name="center"></slot>
+      <slot name="center">
+        <router-link to="/searchlist">
+          <search></search>
+        </router-link>
+      </slot>
     </div>
     <div class="mint-header-button is-right">
       <slot name="right"></slot>
@@ -44,7 +48,7 @@
   @import '../../styles/variables';
     header {
     .center-wrapper{
-      flex: 3;
+      flex: 2;
     }
   }
 </style>
