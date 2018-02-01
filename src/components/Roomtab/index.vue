@@ -1,23 +1,25 @@
 <template>
  <div class="room-tab">
+   <mask-com :TOP="100" v-if="showMaskFromP"></mask-com>
    <mt-navbar v-model="selected">
-     <mt-tab-item id="1">
-       <span class="text">区域</span>
+     <mt-tab-item id="1"  @click.native="zoneHander">
+       <span class="text">{{zoneT}}</span>
        <span class="text">
          <icon name="caret-down"></icon>
        </span>
      </mt-tab-item>
      <mt-tab-item id="2">
-       <span class="text">价格</span>
+       <span class="text">{{priceT}}</span>
        <span class="text">
          <icon name="caret-down"></icon>
        </span>
      </mt-tab-item>
      <mt-tab-item id="3">
-       <span class="text">房型</span>
+       <span class="text">{{roomTypeT}}</span>
        <span class="text">
          <icon name="caret-down"></icon>
        </span>
+
      </mt-tab-item>
      <mt-tab-item id="4">
        <span class="text">更多</span>
@@ -30,7 +32,7 @@
    <!-- tab-container -->
    <mt-tab-container v-model="selected">
      <mt-tab-container-item id="1">
-      <zone></zone>
+      <zone @selectZoneRightItem="selectZoneRightItem"></zone>
      </mt-tab-container-item>
      <mt-tab-container-item id="2">
        <price></price>
@@ -47,9 +49,12 @@
 
 <script type="text/ecmascript-6">
   import { More, Price, Roomtype,Zone} from '@/components/Querypannel'
+  import MaskCom from '@/components/Mask'
+  import { mapMutations } from 'vuex'
   export default {
   name:'',
   components:{
+    MaskCom,
     More,
     Price,
     Roomtype,
@@ -57,7 +62,11 @@
    },
   data(){
      return{
-       selected: '1'
+       zoneT:'区域',
+       priceT:'价格',
+       roomTypeT:'房型',
+       selected: '',
+       selectMode:''
      }
    },
    created(){
@@ -65,8 +74,21 @@
    mounted(){
    },
    computed: {
+     showMaskFromP(){
+       return this.$store.getters.showmask
+     }
    },
    methods: {
+     ...mapMutations({
+       changeShowMask: 'SHOWMASK'
+     }),
+     zoneHander(){
+       this.changeShowMask(!this.showMaskFromP)
+     },
+     selectZoneRightItem(item){
+       this.selected = ''
+       this.zoneT = item
+     }
    }
   }
 </script>
