@@ -67,7 +67,6 @@
        this.$router.push('/')
      },
      selectItem(item){
-       console.log(1)
        this.$router.push({ path: 'querylist', query: { queryItem: item }})
      },
      deleteOne(item){

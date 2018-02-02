@@ -98,7 +98,7 @@
         this.$emit("keySearchWord2",item)
       },
       selectResultItem(item){
-        this.$emit("selectResultItem",item)
+        this.$emit("selectResultItem",item.city)
       }
     },
    mounted(){

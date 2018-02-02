@@ -82,7 +82,7 @@
    },
    created(){
      this.searchZone()
-     // 从路由挂载查询条件参数
+     // 从路由挂载查询条件参数.
      this.queryList.city=this.$route.query.queryItem
    },
    mounted(){
