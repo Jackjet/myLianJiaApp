@@ -7,27 +7,27 @@
            v-infinite-scroll="loadMore"
            infinite-scroll-disabled="loading"
            infinite-scroll-distance="2">
-           <li  @click.stop="selectZoneLeftItem(item,index)" v-for="(item,index) in zoneList" :class="{active:leftIndex===index}">{{ item }}</li>
+           <li  @click.stop="selectZoneLeftItem(item,index)" v-for="(item,index) in zonelist" :class="{active:leftIndex===index}">{{ item }}</li>
          </ul>
        </div>
      </div>
-     <div class="item middle">
+     <div class="item middle" >
        <div class="scroll-wrapper">
          <ul
            v-infinite-scroll="loadMore"
            infinite-scroll-disabled="loading"
-           infinite-scroll-distance="2">
-           <li @click.stop="selectZoneMiddleItem(item,index)" v-for="(item,index) in list" :class="{active:middelIndex===index}">{{ item }}</li>
+           infinite-scroll-distance="10">
+           <li @click.stop="selectZoneMiddleItem(item,index)" v-for="(item,index) in listmiddle" :class="{active:middelIndex===index}">{{ item.data }}</li>
          </ul>
        </div>
      </div>
-     <div class="item right">
+     <div class="item right" v-show="showrightwrapper">
        <div class="scroll-wrapper">
          <ul
            v-infinite-scroll="loadMore"
            infinite-scroll-disabled="loading"
-           infinite-scroll-distance="2">
-           <li  @click.stop="selectZoneRightItem(item,index)" v-for="(item,index) in list" :class="{active:rightIndex===index}">{{ item }}</li>
+           infinite-scroll-distance="10">
+           <li  @click.stop="selectZoneRightItem(item,index)" v-for="(item,index) in zonerightlist" :class="{active:rightIndex===index}">{{ item.data }}</li>
          </ul>
        </div>
      </div>
@@ -44,17 +44,30 @@
   components:{
     MaskCom
    },
-
+  props:{
+    zonelist:{
+    type:Array,
+    default:''
+    },
+    listmiddle:{
+      type:Array,
+      default:''
+    },
+    zonerightlist:{
+      type:Array,
+      default:''
+    }
+  },
   data(){
      return{
        rightIndex:0,
        middelIndex:0,
        leftIndex:0,
-       zoneList:['地区','地铁'],
        list:[1,2,3,4],
        loading: false,
        allLoaded: false,
-       showinmask:true
+       showinmask:true,
+       showrightwrapper:false
      }
    },
    created(){
@@ -68,32 +81,32 @@
    },
    methods: {
      loadMore() {
-       this.loading = true;
-       setTimeout(() => {
-         let last = this.list[this.list.length - 1];
-         for (let i = 1; i <= 10; i++) {
-           this.list.push(last + i);
-         }
-         this.loading = false;
-       }, 10000);
      },
      selectZoneLeftItem(item,index){
        this.leftIndex = index
        this.$emit("selectZoneLeftItem",item)
+       this.showrightwrapper = false
      },
      selectZoneMiddleItem(item,index){
        this.middelIndex = index
-       this.$emit("selectZoneMiddleItem",item)
+       this.$emit("selectZoneMiddleItem",item.data)
      },
      selectZoneRightItem(item,index){
        this.rightIndex = index
-       this.$emit("selectZoneRightItem",item)
+       this.$emit("selectZoneRightItem",item.data)
        this.changeShowMask(false)
      },
      ...mapMutations({
        changeShowMask: 'SHOWMASK'
      })
-   }
+   },
+    watch:{
+      zonerightlist(v){
+        if(v.length){
+          this.showrightwrapper = true
+        }
+      }
+    }
   }
 </script>
 <style scoped lang="scss" rel="stylesheet/scss">
@@ -117,6 +130,11 @@
       }
     }
     li{
+      overflow:hidden;
+      text-overflow:ellipsis;
+      -o-text-overflow:ellipsis;
+      white-space:nowrap;
+      max-width: 2rem;
       border-bottom: 1px solid $line;
       padding-left: 15px;
       height: 40px;

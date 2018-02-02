@@ -16,3 +16,8 @@ Mock.mock(/\/search\/allroom,/, 'get', roomAPI.getAllRoomList)*/
 Mock.mock(/\/search\/room/, 'get', roomAPI.searchRoomList)
 Mock.mock(/\/search\/allroom/, 'get', roomAPI.getAllRoomList)
 Mock.mock(/\/search\/cardinfo/, 'get', roomAPI.getCardInfo)
+
+//查询面板
+Mock.mock(/\/search\/zone/, 'get', remoteSearchAPI.searchZone)
+Mock.mock(/\/search\/ditie/, 'get', remoteSearchAPI.searchDitie)
+Mock.mock(/\/search\/detailzone/, 'get', remoteSearchAPI.searchDetailZone)

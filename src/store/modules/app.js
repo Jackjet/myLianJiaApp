@@ -5,7 +5,8 @@ const app = {
     sidebar: {
       opened: !+Cookies.get('sidebarStatus')
     },
-  showmaskOntab:false
+  showmaskOntab:false,
+  showtabcontainer:false
   },
   mutations: {
     TOGGLE_SIDEBAR: state => {
@@ -18,6 +19,9 @@ const app = {
     },
     SHOWMASK:(state,show)=>{
       state.showmaskOntab = show
+    },
+    SHOWTAB:(state,show)=>{
+      state.showtabcontainer = show
     }
   },
   actions: {

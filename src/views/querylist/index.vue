@@ -37,6 +37,8 @@
   import Searchlist from '@/components/Searchlist'
   import Roomtab from '@/components/Roomtab'
   import Myheader from '@/components/Myheader'
+
+
   export default {
   name:'',
   components:{
@@ -44,7 +46,8 @@
     search,
     Searchlist,
     roomlist,
-    Roomtab
+    Roomtab,
+
    },
     props:{
       placeholder: {
@@ -55,6 +58,7 @@
      return{}
    },
    created(){
+
    },
    mounted(){
    },

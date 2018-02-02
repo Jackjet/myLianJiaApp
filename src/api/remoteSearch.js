@@ -7,4 +7,24 @@ export function citySearch(query) {
     params: query
   })
 }
-
+export function zoneSearch(query) {
+  return request({
+    url: '/search/zone',
+    method: 'get',
+    params: query
+  })
+}
+export function ditieSearch(query) {
+  return request({
+    url: '/search/ditie',
+    method: 'get',
+    params: query
+  })
+}
+export function detailZoneSearch(query) {
+  return request({
+    url: '/search/detailzone',
+    method: 'get',
+    params: query
+  })
+}

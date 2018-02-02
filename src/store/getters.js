@@ -5,6 +5,7 @@ const getters = {
   name: state => state.user.name,
   roles: state => state.user.roles,
   showmask: state => state.app.showmaskOntab,
+  showtabcontainer: state => state.app.showtabcontainer,
   searchlist: state => state.busines.searchHistory
 }
 export default getters

@@ -224,7 +224,6 @@ import {debounce} from '@/utils/index'
      getCardInfo(){
        cardInfoApi().then((res)=>{
          this.cardData = res.data.items;
-         console.log(res.data.items)
        })
      }
    },
