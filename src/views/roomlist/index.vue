@@ -1,6 +1,6 @@
 <template>
  <div class="room-warpper">
-   <div class="header topheader">
+   <div class="header topheader" v-if="showheader">
      <div class="h-title item">
        猜你喜欢
      </div>
@@ -10,6 +10,7 @@
             @click.stop="selectTypeRoom(item,index)">{{item}}</div>
      </div>
    </div>
+   <!--//无限滚动-->
    <div class="list">
      <div class="list-item" v-for="(item,index) in dataList" :key="index">
        <div class="img">
@@ -52,6 +53,10 @@
     dataList:{
       type:Array,
       deafault:[]
+    },
+   showheader:{
+      type:Boolean,
+      default:true
     }
   },
   data(){

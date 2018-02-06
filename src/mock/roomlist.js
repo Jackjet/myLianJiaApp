@@ -2,7 +2,7 @@ import Mock from 'mockjs'
 import { param2Obj } from '@/utils/index'
 
 const mockList = []
-const count = 18
+const count = 28
 const cardList = []
 const cartdCount = 2
 for (let i = 0; i < count; i++) {
@@ -25,7 +25,10 @@ for (let i = 0; i < count; i++) {
     totalPrice:'@natural(66, 388)'+'万',
     price:'@natural(3666, 9888)'+'元/平',
     id: '@increment',
-    img:"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3739955964,2895168016&fm=27&gp=0.jpg"
+    img:"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3739955964,2895168016&fm=27&gp=0.jpg",
+    data:'@county',
+    id: '@increment',
+    'line|1':['1 号线','2 号线','3 号线','4 号线','5 号线','6 号线','7 号线','8 号线','9 号线','10 号线']
   }))
 }
 for (let i = 0; i < cartdCount; i++) {
@@ -43,6 +46,7 @@ for (let i = 0; i < cartdCount; i++) {
   }
   ))
 }
+let page = 0
 export default {
   searchRoomList: config => {
     const searchItem  = param2Obj(config.url)
@@ -56,7 +60,35 @@ export default {
   getAllRoomList: () => {
      return { items: mockList }
   },
+
+  searchRoomByQuery: (config) => {
+    let tempList = []
+    let step = 6
+    let hasData = true
+    /*这里传过来的值类型是字符串类型！！*/
+    const {city,line,detailzone,morenum}  = param2Obj(config.url)
+     let moreNum = parseInt(morenum)
+
+      if(moreNum){
+       step = moreNum
+        // page定义在全局中
+       ++page;
+       let end = (page * step) + step
+
+       if(mockList[end]!==undefined){
+         let start = page * step
+         tempList = mockList.slice(start,end)
+
+       }else{
+         hasData = false
+       }
+    }else{
+       tempList = mockList.slice(page,step)
+    }
+
+    return { items: tempList,hasMore:hasData }
+  },
   getCardInfo:()=>{
-    return { items: cardList }
+    return { items: cardLis }
   }
 }

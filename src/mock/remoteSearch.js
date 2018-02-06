@@ -41,10 +41,11 @@ for (let i = 0; i < lenght; i++) {
 const detailZoneList =[]
 
 
-for (let i = 0; i < lenght; i++) {
+for (let i = 0; i < 30; i++) {
   detailZoneList.push(Mock.mock({
     data:'@county',
     id: '@increment',
+    'line|1':['1 号线','2 号线','3 号线','4 号线','5 号线','6 号线','7 号线','8 号线','9 号线','10 号线']
   }))
 }
 
@@ -84,7 +85,16 @@ export default {
 
       return true
     })*/
-    return {items: detailZoneList}
+    let tempList = detailZoneList.filter(item=>{
+      if(line){
+        if(item.line.indexOf('号线')>-1){
+          let temp = item.line.replace(/[^0-9]/ig,"");
+          if(line && temp !==line)return false
+        }
+      }
+      return true
+    })
+    return {items: tempList}
   },
   searchDitie: config=>{
     return {items: dietieList}

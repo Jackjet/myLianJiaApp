@@ -7,7 +7,13 @@ export function roomSearch(type) {
     params: { type }
   })
 }
-
+export function roomByQuery(query) {
+  return request({
+    url: '/search/byquery',
+    method: 'get',
+    params: query
+  })
+}
 export function AllRoomList() {
   return request({
     url: '/search/allroom',
@@ -20,3 +26,4 @@ export function cardInfoApi(city) {
     method: 'get'
   })
 }
+
