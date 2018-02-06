@@ -92,10 +92,11 @@
        this.queryList = q
      },
      searchRoomByQuery(q){
-       return new Promise(()=>{
+       return new Promise((resolve,reject)=>{
          roomByQuery(q).then(res=>{
            this.roomlist = res.data.items
          })
+         resolve();
        })
 
      },
