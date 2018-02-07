@@ -34,7 +34,7 @@
      <mt-tab-container-item id="1">
       <zone @selectZoneRightItem="selectZoneRightItem" :listmiddle="zoneListMiddle" :zonelist=zonelist :zonerightlist=zoneListRight @selectZoneLeftItem="selectZoneLeftItem" @selectZoneMiddleItem="selectZoneMiddleItem"></zone>
      </mt-tab-container-item>
-     <mt-tab-container-item id="2">
+     <mt-tab-container-item id="2" class="price-wrapper">
        <price></price>
      </mt-tab-container-item>
      <mt-tab-container-item id="3">
@@ -162,6 +162,9 @@
 </script>
 <style scoped lang="scss" rel="stylesheet/scss">
   @import '../../styles/variables';
+  .price-wrapper{
+    padding:10px;
+  }
   .mint-tab-item-label{
     .text{
       color:$text2;

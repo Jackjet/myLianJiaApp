@@ -134,7 +134,7 @@
       text-overflow:ellipsis;
       -o-text-overflow:ellipsis;
       white-space:nowrap;
-      max-width: 2rem;
+      max-width: 4rem;
       border-bottom: 1px solid $line;
       padding-left: 15px;
       height: 40px;
