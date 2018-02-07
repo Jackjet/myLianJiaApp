@@ -14,6 +14,13 @@ export function roomByQuery(query) {
     params: query
   })
 }
+export function refresh(query) {
+  return request({
+    url: '/search/refresh',
+    method: 'get',
+    params: query
+  })
+}
 export function AllRoomList() {
   return request({
     url: '/search/allroom',

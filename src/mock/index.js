@@ -15,6 +15,7 @@ Mock.mock(/\/search\/allroom,/, 'get', roomAPI.getAllRoomList)*/
 
 Mock.mock(/\/search\/room/, 'get', roomAPI.searchRoomList)
 Mock.mock(/\/search\/byquery/, 'get', roomAPI.searchRoomByQuery)
+Mock.mock(/\/search\/refresh/, 'get', roomAPI.refresh)
 Mock.mock(/\/search\/allroom/, 'get', roomAPI.getAllRoomList)
 Mock.mock(/\/search\/cardinfo/, 'get', roomAPI.getCardInfo)
 

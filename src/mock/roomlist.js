@@ -46,7 +46,6 @@ for (let i = 0; i < cartdCount; i++) {
   }
   ))
 }
-let page = 0
 export default {
   searchRoomList: config => {
     const searchItem  = param2Obj(config.url)
@@ -60,19 +59,24 @@ export default {
   getAllRoomList: () => {
      return { items: mockList }
   },
-
+  refresh:(config) =>{
+    let this_step = 6
+    let tempList = []
+    const {step}  = param2Obj(config.url)
+    if(step){
+       this_step = parseInt(step)
+    }
+    tempList = mockList.slice(0,this_step)
+    return { items: tempList}
+  },
   searchRoomByQuery: (config) => {
     let tempList = []
-    let step = 6
     let hasData = true
     /*这里传过来的值类型是字符串类型！！*/
-    const {city,line,detailzone,morenum}  = param2Obj(config.url)
-     let moreNum = parseInt(morenum)
-
-      if(moreNum){
-       step = moreNum
-        // page定义在全局中
-       ++page;
+    let objQuery = param2Obj(config.url)
+    let step = parseInt(objQuery.step)
+    let page = parseInt(objQuery.page)
+      if(step){
        let end = (page * step) + step
 
        if(mockList[end]!==undefined){
@@ -83,12 +87,14 @@ export default {
          hasData = false
        }
     }else{
+      // 默认打开的时候加载的宽度
+       step = 6
        tempList = mockList.slice(page,step)
     }
 
     return { items: tempList,hasMore:hasData }
   },
   getCardInfo:()=>{
-    return { items: cardLis }
+    return { items: cardList }
   }
 }
