@@ -88,3 +88,7 @@ price
 抽离选择按钮组件，作为基础组件
 selectbutton组件创建
 dom 创建类的新增、删除
+
+selectbutton组件创建
+完善组件功能，条件通过obj传递
+价格区间也应该移到selectbutton去

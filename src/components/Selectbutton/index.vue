@@ -120,7 +120,11 @@
        }
      },
      confirmHander(){
-       this.$emit("selectQuery",{q:this.temp})
+       if(this.temp){
+         this.$emit("selectQuery",{q:this.temp})
+       }else{
+         this.noQuery()
+       }
      },
      clearQuery(){
        const items =this.$refs.item

@@ -29,6 +29,8 @@
      return{
        upNumber:'',
        downNumber:'',
+       queryList:[],
+       priceObj:{},
        dataList:[
          {'itemDeitail':['100万以下','200万以下','300万以下','400万以下','500万以下','1600万以下'],
            'queryType':'price'
@@ -59,9 +61,19 @@
    },
    methods: {
      selectQuery(item){
-       console.log(item)
+       this.queryList.push(item)
+       console.log(this.queryList)
      }
-   }
+   },
+    watch:{
+      upNumber(v){
+        if(v){
+          this.priceObj.upPirce = v
+          this.queryList.push(this.priceObj)
+          console.log(this.queryList)
+        }
+      }
+    }
   }
 </script>
 <style scoped lang="scss" rel="stylesheet/scss">
