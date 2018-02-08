@@ -13,7 +13,7 @@
      </div>
    </div>
    <div class="bottons-wrapper">
-     <selctbottone :data-list="dataList"></selctbottone>
+     <selctbottone @selectQuery="selectQuery" :data-list="dataList"></selctbottone>
    </div>
  </div>
 </template>
@@ -29,7 +29,20 @@
      return{
        upNumber:'',
        downNumber:'',
-       dataList:['100万以下','200万以下','300万以下','400万以下','500万以下','1600万以下']
+       dataList:[
+         {'itemDeitail':['100万以下','200万以下','300万以下','400万以下','500万以下','1600万以下'],
+           'queryType':'price'
+         },
+         {'itemDeitail':['一室','二室','三室','四室','五室','六室'],
+           'title':'房型选择',
+           'queryType':'roomType'
+         },
+         {'itemDeitail':['朝东','朝南','朝北','朝西','南北'],
+           'title':'朝向',
+           'queryType':'chaoXiang'
+         }
+         ]
+
      }
    },
    created(){
@@ -45,6 +58,9 @@
    computed: {
    },
    methods: {
+     selectQuery(item){
+       console.log(item)
+     }
    }
   }
 </script>

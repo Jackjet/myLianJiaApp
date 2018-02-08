@@ -83,3 +83,8 @@ querylist
 mock roomlist
 接受参数使用obj接收，便于管理，否则调试困难
 页数和步长应由前台传递，不在后台定义
+
+price 
+抽离选择按钮组件，作为基础组件
+selectbutton组件创建
+dom 创建类的新增、删除
