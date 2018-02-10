@@ -1,5 +1,8 @@
 <template>
  <div class="select-botton-wrapper">
+   <div class="price-com" v-if="showPriceCom">
+     <pricerange @priceRange="getRangePrice" :buttonselect-flag="buttonselectFlag"></pricerange>
+   </div>
    <div class="querylist-wrapper" v-for="(itemWrapper,indexWrapper) in dataList">
      <div class="query-title border-1px" v-if="itemWrapper.title">
        <header>{{itemWrapper.title}}</header>
@@ -24,11 +27,17 @@
 
 <script type="text/ecmascript-6">
   import {hasClass,toggleClass,removeClass} from '@/utils/dom'
+  import Pricerange from '@/components/Selectbutton/Pricerange'
   export default {
   name:'',
   components:{
+    Pricerange
    },
    props:{
+     showPriceCom:{
+       type:Boolean,
+       default:false
+     },
     col:{
       type:Number,
       default:4
@@ -48,9 +57,13 @@
    },
   data(){
      return{
+       buttonselectFlag:0,//价格标签是否有被选中的，以便和价格范围联动
        buttonObj:{},
+       priceObj:{},
+       pobj:{},
        temp:[
     /*     {'price':['10万一下','20万一下']},
+           {'priceRange':{'upPrice':222,'downPrice'}}
            {'roomType':['一室','三室']}*/
        ]
      }
@@ -93,7 +106,14 @@
        toggleClass(e.target,'active')
        this.addSelectData(e,item,queryType)
        this.deletData(e,item,queryType)
-       console.log(this.temp)
+       if(this.checkIsSelectItem()){
+         // 若this.buttonselectFlag类型为布尔值，传给组件，观察的值只有当布尔值发生变化才执行
+         // 所以这里改为传数字
+         this.buttonselectFlag = this.buttonselectFlag +1
+       }else{
+         this.buttonselectFlag = this.buttonselectFlag -1
+       }
+
      },
      addSelectData(e,item,queryType){
        if(hasClass(e.target,'active')){
@@ -119,9 +139,26 @@
          this.temp[inserIndex][queryType].splice(deletIndex,1)
        }
      },
+     getRangePrice(item){
+      // {'priceRange':{'upPrice':222,'downPrice'}}
+       // 点选价格区间，清除价格标签
+       this.clearQuery()
+       const key = 'priceRange'
+       if(item.upPrice){
+         this.pobj['upPrice'] = item.upPrice
+       }
+       if(item.downPirce){
+         this.pobj['downPrice'] = item.downPirce
+       }
+       this.priceObj[key] =  this.pobj
+
+       if(!this.checkIsSaveType(key) ){
+         this.temp.push(this.priceObj)
+       }
+     },
      confirmHander(){
-       if(this.temp){
-         this.$emit("selectQuery",{q:this.temp})
+       if(!(this.temp.length === 0)){
+         this.$emit("selectQuery",this.temp)
        }else{
          this.noQuery()
        }
@@ -136,7 +173,16 @@
        }
      },
      noQuery(){
-       this.$emit("selectQuery",{q:'no'})
+       this.$emit("selectQuery",'noQuery')
+     },
+     //检查是否有被选中价格标签的
+     checkIsSelectItem(){
+       const items =this.$refs.item
+       for(let i=0;i<items.length;i++){
+         if(hasClass(items[i],'active') ){
+           return true
+         }
+       }
      }
    }
   }

@@ -28,3 +28,10 @@ export function detailZoneSearch(query) {
     params: query
   })
 }
+export function moreQuerySearch(query) {
+  return request({
+    url: '/search/querymore',
+    method: 'get',
+    params: query
+  })
+}

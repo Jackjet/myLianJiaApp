@@ -48,6 +48,42 @@ for (let i = 0; i < 30; i++) {
     'line|1':['1 号线','2 号线','3 号线','4 号线','5 号线','6 号线','7 号线','8 号线','9 号线','10 号线']
   }))
 }
+const moreQueryList = []
+  moreQueryList.push(
+    {
+      "itemDeitail": ['50以下','50-70','70-90','90-110','110-140','140-170','170-200','200以上'],
+      'title':'建筑面积(m²)',
+      'queryType':'squerySize'
+    },
+    {'itemDeitail':['朝东','朝南','朝北','朝西','南北'],
+      'title':'朝向',
+      'queryType':'chaoXiang'
+    },
+    {'itemDeitail':['低','中','高'],
+      'title':'楼层',
+      'queryType':'floorType'
+    },
+    {'itemDeitail':['精装修','普通装修','毛坯房'],
+      'title':'装修',
+      'queryType':'zhuangxiuType'
+    },
+    {'itemDeitail':['有电梯','无电梯'],
+      'title':'电梯',
+      'queryType':'diantiType'
+    },
+    {'itemDeitail':['商品房','公房','经适房','其它'],
+      'title':'权属',
+      'queryType':'quanshuType'
+    },
+    {'itemDeitail':['5年以内','5年以内','10年以内','15年以内','20年以内','20年以上'],
+      'title':'楼龄',
+      'queryType':'yearsType'
+    },
+    {'itemDeitail':['满五年','满两年','近地铁','新上','随时看房','不看地下室','不看车位','优选'],
+      'title':'标签',
+      'queryType':'tagType'
+    }
+  )
 
 export default {
   searchCity: config => {
@@ -98,5 +134,8 @@ export default {
   },
   searchDitie: config=>{
     return {items: dietieList}
+  },
+  searchMoreQuery: config=>{
+    return {items: moreQueryList}
   }
 }
