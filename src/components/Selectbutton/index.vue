@@ -1,7 +1,7 @@
 <template>
  <div class="select-botton-wrapper">
    <div class="price-com" v-if="showPriceCom">
-     <pricerange @priceRange="getRangePrice" :buttonselect-flag="buttonselectFlag"></pricerange>
+     <pricerange :check-who-is-big="checkWhoIsBig" @priceRange="getRangePrice" :buttonselect-flag="buttonselectFlag"></pricerange>
    </div>
    <div class="querylist-wrapper" v-for="(itemWrapper,indexWrapper) in dataList">
      <div class="query-title border-1px" v-if="itemWrapper.title">
@@ -57,6 +57,7 @@
    },
   data(){
      return{
+       checkWhoIsBig:0,
        buttonselectFlag:0,//价格标签是否有被选中的，以便和价格范围联动
        buttonObj:{},
        priceObj:{},
@@ -157,6 +158,7 @@
        }
      },
      confirmHander(){
+       this.checkWhoIsBig = this.checkWhoIsBig+1
        if(!(this.temp.length === 0)){
          this.$emit("selectQuery",this.temp)
        }else{

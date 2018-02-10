@@ -24,12 +24,14 @@
       buttonselectFlag:{
         type:Number,
         default:0
+      },
+      checkWhoIsBig:{
+        type:Number,
+        default:0
       }
     },
   data(){
      return{
-       onfocusUp:false,
-       onfocusDonw:false,
        priceObj:{},
        upNumber:'',
        downNumber:'',
@@ -50,6 +52,24 @@
          inputDom[j].setAttribute('style','background-image:none;font-size:12px')
        }
      },
+     checkWhoIsBigHandler(){
+       // 低不能比高大
+         return new Promise((resolve)=>{
+           if(this.priceObj.upPrice && this.priceObj.downPirce ){
+
+             if( this.priceObj.upPrice >  this.priceObj.downPirce){
+               const temp =this.priceObj.downPirce
+
+               this.downNumber = this.priceObj.upPrice
+               this.priceObj.downPirce = this.priceObj.upPrice
+
+               this.upNumber = temp
+               this.priceObj.upPrice = temp
+             }
+           }
+           resolve()
+         })
+     },
      emitData(){
        this.$emit('priceRange',this.priceObj)
      }
@@ -62,7 +82,7 @@
           this.upNumber = this.$refs.up.currentValue
           this.priceObj.upPrice =  this.upNumber
           this.emitData()
-        }
+         }
       },
       downNumber(v){
         if(v){
@@ -73,10 +93,11 @@
         }
       },
       // 只有传过来的值发生变化，才会执行
-      buttonselectFlag(v){
-        if(v){
-          this.upNumber = this.downNumber = ''
-        }
+      buttonselectFlag(){
+        this.upNumber = this.downNumber = ''
+      },
+      checkWhoIsBig(){
+        this.checkWhoIsBigHandler()
       }
     }
   }

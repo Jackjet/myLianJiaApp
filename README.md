@@ -92,3 +92,5 @@ dom 创建类的新增、删除
 selectbutton组件创建
 完善组件功能，条件通过obj传递
 价格区间也应该移到selectbutton去
+
+priceRang组件 和价格标签组件实现联调功能
