@@ -1,7 +1,7 @@
 <template>
  <div class="price-wrapper">
     <div class="bottons-wrapper">
-     <selctbottone @selectQuery="selectQuery" :data-list="dataList" :show-price-com="true"></selctbottone>
+     <selctbottone :data-list="dataList" :show-price-com="true"></selctbottone>
    </div>
  </div>
 </template>
@@ -15,7 +15,6 @@
    },
   data(){
      return{
-
        queryList:[],
        priceObj:{},
        dataList:[
@@ -44,15 +43,13 @@
    computed: {
    },
    methods: {
-     selectQuery(item){
-      console.log(item)
-     },
-
    },
 
   }
 </script>
 <style scoped lang="scss" rel="stylesheet/scss">
-
+.price-wrapper{
+  z-index: 30;
+}
 
 </style>

@@ -94,11 +94,7 @@
      selectZoneRightItem(item,index){
        this.rightIndex = index
        this.$emit("selectZoneRightItem",item.data)
-       this.changeShowMask(false)
      },
-     ...mapMutations({
-       changeShowMask: 'SHOWMASK'
-     })
    },
     watch:{
       zonerightlist(v){
@@ -114,7 +110,7 @@
   @import '../../../styles/mixin.scss';
   .box{
     position: relative;
-    z-index: 9;
+    z-index: 30;
     background: #fff;
     display: flex;
     font-size: $font-size-medium-x;

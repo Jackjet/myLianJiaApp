@@ -28,6 +28,8 @@
 <script type="text/ecmascript-6">
   import {hasClass,toggleClass,removeClass} from '@/utils/dom'
   import Pricerange from '@/components/Selectbutton/Pricerange'
+
+  import { mapMutations } from 'vuex'
   export default {
   name:'',
   components:{
@@ -76,6 +78,10 @@
    computed: {
    },
    methods: {
+     ...mapMutations({
+       selectItemInState:'SELECTITEMID',
+       saveQueryItem:'SAVEIROOMTABQUERYITEM'
+     }),
      //是否已经存储过查询类型
      // 实现思路，先确定返回的temp的数据结构（模拟）
      //遍历里面的数据结构（键名）
@@ -164,6 +170,11 @@
        }else{
          this.noQuery()
        }
+       //展开项关闭
+       this.selectItemInState('')
+       //存储条件
+       this.saveQueryItem(this.temp)
+       // 存储查询动作，以便watch条件变化（hack方法，有待改进）
      },
      clearQuery(){
        const items =this.$refs.item
@@ -192,6 +203,12 @@
 <style scoped lang="scss" rel="stylesheet/scss">
   @import '../../styles/variables';
   @import '../../styles/mixin';
+  .select-botton-wrapper{
+    position: relative;
+    z-index: 30;
+    padding:15px 10px 10px 10px;
+    background: $color-white;
+  }
   .query-title{
     padding:10px 0;
     font-size: $font-size-medium-x;

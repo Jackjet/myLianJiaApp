@@ -1,7 +1,7 @@
 <template>
-  <div class="price-wrapper">
+  <div class="more-wrapper">
     <div class="bottons-wrapper">
-      <selctbottone @selectQuery="selectQuery" :data-list="dataList" :simple-query="false" :more-query="true" ></selctbottone>
+      <selctbottone :col="3" :data-list="dataList" :simple-query="false" :more-query="true" ></selctbottone>
     </div>
   </div>
 </template>
@@ -30,14 +30,13 @@
     computed: {
     },
     methods: {
-      selectQuery(item){
-        console.log(item)
-      }
     },
 
   }
 </script>
 <style scoped lang="scss" rel="stylesheet/scss">
-
+.more-wrapper{
+  z-index: 30;
+}
 
 </style>

@@ -2,26 +2,26 @@
  <div class="room-tab">
    <mask-com :TOP="100" v-if="showMaskFromP" :ZINDEX="2"></mask-com>
    <mt-navbar v-model="selected">
-     <mt-tab-item id="1"  @click.native="zoneHander">
+     <mt-tab-item id="1"  @click.native="selectItemHander">
        <span class="text">{{zoneT}}</span>
        <span class="text">
          <icon name="caret-down"></icon>
        </span>
      </mt-tab-item>
-     <mt-tab-item id="2">
+     <mt-tab-item id="2" @click.native="selectItemHander">
        <span class="text">{{priceT}}</span>
        <span class="text">
          <icon name="caret-down"></icon>
        </span>
      </mt-tab-item>
-     <mt-tab-item id="3">
+     <mt-tab-item id="3" @click.native="selectItemHander">
        <span class="text">{{roomTypeT}}</span>
        <span class="text">
          <icon name="caret-down"></icon>
        </span>
 
      </mt-tab-item>
-     <mt-tab-item id="4">
+     <mt-tab-item id="4" @click.native="selectItemHander">
        <span class="text">更多</span>
        <span class="text">
          <icon name="caret-down"></icon>
@@ -68,7 +68,7 @@
        zoneT:'区域',
        priceT:'价格',
        roomTypeT:'房型',
-       selected: '',
+       selected: '',//itemtab被选中的索引
        selectMode:'',
        zonetag:false,
        zonelist:['区域','地铁'],
@@ -78,7 +78,7 @@
          city:'',
          line:'',
          detailzone:'',
-       }
+       },
      }
    },
    created(){
@@ -87,25 +87,33 @@
      this.queryList.city=this.$route.query.queryItem
    },
    mounted(){
+    this.saveIdsTabItemInState()
    },
    computed: {
+     // 蒙版展示条件
      showMaskFromP(){
-       return this.$store.getters.showmask
+       return this.$store.getters.selectItem
      },
-     showTabFromState(){
-       return this.$store.getters.showtabcontainer
+     // 具体选择的条件item
+     getQueryComfirmTag(){
+       return this.$store.getters.comfirmTag
      }
    },
    methods: {
      ...mapMutations({
        changeShowMask: 'SHOWMASK',
        changeShowTab: 'SHOWTAB',
+       saveItemIds:'SAVEITEMIDS',
+       selectItem:'SELECTITEMID'
      }),
-     zoneHander(){
-/*       this.selected = this.getSelectFlag(1)*/
-       this.changeShowMask(!this.showMaskFromP)
-       this.changeShowTab(!this.showTabFromState)
-
+     // 子项展开与否
+     selectItemHander(){
+       if(! (this.$store.getters.selectItem === this.selected)){
+         this.saveSelectItemId(this.selected)
+       }else{
+         this.selected = ''
+         this.saveSelectItemId(this.selected)
+       }
      },
      selectZoneLeftItem(item){
        if(item==='地铁'){
@@ -130,6 +138,7 @@
          // 最终选择的条件
          this.queryList.detailzone = item
          this.zoneT = item
+         this.saveSelectItemId('')
          this.selected = ''
        }else{
          Toast('请选择有效的信息！');
@@ -149,6 +158,19 @@
        detailZoneSearch(this.queryList).then((res)=>{
          this.zoneListRight= res.data.items
        })
+     },
+     //把item子项的id存入state中，统一管理打开关闭的状态
+     saveIdsTabItemInState(){
+       let itemIds = []
+       const childCom =  this.$refs.tabContainer.$children
+       childCom.forEach((item)=>{
+         itemIds.push(item.id)
+       })
+       this.saveItemIds(itemIds)
+     },
+     // 选中的tab存入state中
+     saveSelectItemId(id){
+       this.selectItem(id)
      }
    },
     watch:{
@@ -156,6 +178,15 @@
         if(v!=='区域'){
           this.$emit("selectZoneT",this.queryList)
         }
+      },
+      // 监听state的变化，当为空，关闭选项
+      showMaskFromP(v){
+        if(!v){
+          this.selected = ''
+        }
+      },
+      getQueryComfirmTag(){
+        console.log( this.$store.getters.roomTabQueryItem)
       }
     }
   }
@@ -163,7 +194,6 @@
 <style scoped lang="scss" rel="stylesheet/scss">
   @import '../../styles/variables';
   .price-wrapper{
-    padding:10px;
   }
   .mint-tab-item-label{
     .text{

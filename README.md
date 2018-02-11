@@ -94,3 +94,5 @@ selectbutton组件创建
 价格区间也应该移到selectbutton去
 
 priceRang组件 和价格标签组件实现联调功能
+priceRang组件
+价格上下谁大谁小切换
