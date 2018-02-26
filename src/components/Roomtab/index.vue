@@ -79,6 +79,7 @@
          line:'',
          detailzone:'',
        },
+       lastSelectQueryItem:''
      }
    },
    created(){
@@ -87,7 +88,6 @@
      this.queryList.city=this.$route.query.queryItem
    },
    mounted(){
-    this.saveIdsTabItemInState()
    },
    computed: {
      // 蒙版展示条件
@@ -97,6 +97,10 @@
      // 具体选择的条件item
      getQueryComfirmTag(){
        return this.$store.getters.comfirmTag
+     },
+     //查询条件
+     getTabQueryItem(){
+       return this.$store.getters.roomTabQueryItem
      }
    },
    methods: {
@@ -159,18 +163,50 @@
          this.zoneListRight= res.data.items
        })
      },
-     //把item子项的id存入state中，统一管理打开关闭的状态
-     saveIdsTabItemInState(){
-       let itemIds = []
-       const childCom =  this.$refs.tabContainer.$children
-       childCom.forEach((item)=>{
-         itemIds.push(item.id)
-       })
-       this.saveItemIds(itemIds)
-     },
      // 选中的tab存入state中
      saveSelectItemId(id){
        this.selectItem(id)
+     },
+     //查询面板条件反馈
+     loadQueryOnTab(obj){
+       console.log(Object.keys(obj))
+       console.log(Object.values(obj))
+       const value = Object.values(obj)[0]
+       const itemKey = Object.keys(obj)[0]
+       const last = value.length - 1
+       const itemLenght = value.length
+       switch (itemKey){
+         case 'priceType':
+           if(itemLenght > 1){
+             this.priceT = '多选'
+             break;
+           }
+           this.priceT = value[last]
+            break;
+         case 'roomType':
+           if(itemLenght > 1){
+             this.roomTypeT = '多选'
+             break;
+           }
+           this.roomTypeT =  value[last]
+           break;
+         case 'priceRange':
+           if(value.upPrice && !value.downPrice){
+             this.priceT = value.upPrice + '万以上'
+           }
+           if(!value.upPrice && value.downPrice){
+             this.priceT = value.downPrice + '万以下'
+           }
+           if(value.upPrice && value.downPrice){
+             this.priceT = value.upPrice + '_' + value.downPrice + '万'
+           }
+           break;
+       }
+/*       for(let key in obj){
+         if(key.indexOf('priceType') > -1 ){
+           this.priceT = obj.priceType
+         }
+       }*/
      }
    },
     watch:{
@@ -185,8 +221,12 @@
           this.selected = ''
         }
       },
+      // 当点击查询面板里面的确定按钮之后执行事件
       getQueryComfirmTag(){
-        console.log( this.$store.getters.roomTabQueryItem)
+        //console.log( this.$store.getters.roomTabQueryItem)
+        const lastIndex = this.$store.getters.roomTabQueryItem.length-1
+        this.lastSelectQueryItem = this.$store.getters.roomTabQueryItem[lastIndex]
+        this.loadQueryOnTab(this.lastSelectQueryItem)
       }
     }
   }

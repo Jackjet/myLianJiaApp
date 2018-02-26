@@ -5,7 +5,6 @@ const app = {
     sidebar: {
       opened: !+Cookies.get('sidebarStatus')
     },
-  itemTabId:[],
   selectItem:'',
   roomTabQueryItem:[],
   comfirmTag:false
@@ -25,11 +24,9 @@ const app = {
     SHOWTAB:(state,show)=>{
       state.showtabcontainer = show
     },
-    SAVEITEMIDS:(state,ids)=>{
-      state.itemTabId = ids
-    },
     SAVEIROOMTABQUERYITEM:(state,q)=>{
       state.comfirmTag = !state.comfirmTag
+      state.roomTabQueryItem = []
       state.roomTabQueryItem = q
     },
     SELECTITEMID:(state,id)=>{

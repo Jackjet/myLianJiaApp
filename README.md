@@ -96,3 +96,7 @@ selectbutton组件创建
 priceRang组件 和价格标签组件实现联调功能
 priceRang组件
 价格上下谁大谁小切换
+
+通过状态树state控制条件面板切换打开与否
+区域条件和其它三个的条件监听变化 可区分处理
+其它三个都是使用了selectbutton组件封装的

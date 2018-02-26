@@ -173,6 +173,7 @@
        //展开项关闭
        this.selectItemInState('')
        //存储条件
+     //  console.log(this.temp)
        this.saveQueryItem(this.temp)
        // 存储查询动作，以便watch条件变化（hack方法，有待改进）
      },
