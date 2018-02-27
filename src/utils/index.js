@@ -76,3 +76,28 @@ export function formatTime(time, option) {
     return d.getMonth() + 1 + '月' + d.getDate() + '日' + d.getHours() + '时' + d.getMinutes() + '分'
   }
 }
+
+export function checkIsSaveType(queryType) {
+  let flag = false
+  this.temp.forEach((obj)=>{
+    for(let key in obj){
+      if(key.indexOf(queryType) < 0){
+        return
+      }else{
+        flag = true
+      }
+    }
+  })
+  return flag
+}
+
+export function findIndexByQueryTypeInTemp(queryType) {
+  const findIndex =  this.temp.findIndex((obj)=>{
+    for(let key in obj){
+      if(key.indexOf(queryType) > -1 ){
+        return true
+      }
+    }
+  })
+  return  findIndex
+}

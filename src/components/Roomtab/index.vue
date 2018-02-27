@@ -3,26 +3,26 @@
    <mask-com :TOP="100" v-if="showMaskFromP" :ZINDEX="2"></mask-com>
    <mt-navbar v-model="selected">
      <mt-tab-item id="1"  @click.native="selectItemHander">
-       <span class="text">{{zoneT}}</span>
+       <span class="text" :class="{active:zoneSelect}">{{zoneT}}</span>
        <span class="text">
          <icon name="caret-down"></icon>
        </span>
      </mt-tab-item>
      <mt-tab-item id="2" @click.native="selectItemHander">
-       <span class="text">{{priceT}}</span>
-       <span class="text">
+       <span class="text" :class="{'active':priceSelect}">{{priceT}}</span>
+       <span class="text" >
          <icon name="caret-down"></icon>
        </span>
      </mt-tab-item>
      <mt-tab-item id="3" @click.native="selectItemHander">
-       <span class="text">{{roomTypeT}}</span>
+       <span class="text" :class="{active:roomSelect}">{{roomTypeT}}</span>
        <span class="text">
          <icon name="caret-down"></icon>
        </span>
 
      </mt-tab-item>
      <mt-tab-item id="4" @click.native="selectItemHander">
-       <span class="text">更多</span>
+       <span class="text" :class="{active:moreSelect}">更多</span>
        <span class="text">
          <icon name="caret-down"></icon>
        </span>
@@ -66,6 +66,10 @@
   data(){
      return{
        zoneT:'区域',
+       zoneSelect:false,
+       priceSelect:false,
+       roomSelect:false,
+       moreSelect:false,
        priceT:'价格',
        roomTypeT:'房型',
        selected: '',//itemtab被选中的索引
@@ -169,8 +173,6 @@
      },
      //查询面板条件反馈
      loadQueryOnTab(obj){
-       console.log(Object.keys(obj))
-       console.log(Object.values(obj))
        const value = Object.values(obj)[0]
        const itemKey = Object.keys(obj)[0]
        const last = value.length - 1
@@ -181,11 +183,19 @@
              this.priceT = '多选'
              break;
            }
+           if(itemLenght===0){
+             this.priceT = '价格'
+             break;
+           }
            this.priceT = value[last]
             break;
          case 'roomType':
            if(itemLenght > 1){
              this.roomTypeT = '多选'
+             break;
+           }
+           if(itemLenght===0){
+             this.roomTypeT = '房型'
              break;
            }
            this.roomTypeT =  value[last]
@@ -198,7 +208,7 @@
              this.priceT = value.downPrice + '万以下'
            }
            if(value.upPrice && value.downPrice){
-             this.priceT = value.upPrice + '_' + value.downPrice + '万'
+             this.priceT = value.upPrice + '-' + value.downPrice + '万'
            }
            break;
        }
@@ -210,9 +220,30 @@
      }
    },
     watch:{
+   /*   zoneSelect:false,
+      priceSelect:false,
+      roomSelect:false,
+      moreSelect:false,
+      priceT:'价格',
+      roomTypeT:'房型',*/
       zoneT(v){
         if(v!=='区域'){
+          this.zoneSelect = true
           this.$emit("selectZoneT",this.queryList)
+        }
+      },
+      priceT(v){
+        if(!(v==='价格')){
+          this.priceSelect = true
+        }else{
+          this.priceSelect = false
+        }
+      },
+      roomTypeT(v){
+        if(!(v==='房型')){
+          this.roomSelect = true
+        }else{
+          this.roomSelect = false
         }
       },
       // 监听state的变化，当为空，关闭选项
@@ -226,7 +257,10 @@
         //console.log( this.$store.getters.roomTabQueryItem)
         const lastIndex = this.$store.getters.roomTabQueryItem.length-1
         this.lastSelectQueryItem = this.$store.getters.roomTabQueryItem[lastIndex]
-        this.loadQueryOnTab(this.lastSelectQueryItem)
+        //条件为空不传
+        if(this.lastSelectQueryItem){
+          this.loadQueryOnTab(this.lastSelectQueryItem)
+        }
       }
     }
   }
@@ -240,6 +274,20 @@
       color:$text2;
       font-size:$font-size-medium ;
       margin-left: 5px;
+    }
+  }
+  .mint-tab-item-label{
+    .active{
+      color:$blue;
+    }
+  }
+  .mint-navbar .mint-tab-item{
+    .text{
+      display: inline-block;
+      max-width: 55px;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
     }
   }
   .mint-navbar .mint-tab-item.is-selected {

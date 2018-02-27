@@ -7,6 +7,7 @@ const app = {
     },
   selectItem:'',
   roomTabQueryItem:[],
+  totalQuerl:[],
   comfirmTag:false
   },
   mutations: {
@@ -25,8 +26,11 @@ const app = {
       state.showtabcontainer = show
     },
     SAVEIROOMTABQUERYITEM:(state,q)=>{
+      //传过来的条件都是单一的obj条件
+      //现在需要把条件集合到一起
       state.comfirmTag = !state.comfirmTag
       state.roomTabQueryItem = []
+
       state.roomTabQueryItem = q
     },
     SELECTITEMID:(state,id)=>{

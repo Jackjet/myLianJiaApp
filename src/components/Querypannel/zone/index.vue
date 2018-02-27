@@ -130,7 +130,7 @@
       text-overflow:ellipsis;
       -o-text-overflow:ellipsis;
       white-space:nowrap;
-      max-width: 4rem;
+      max-width: 3rem;
       border-bottom: 1px solid $line;
       padding-left: 15px;
       height: 40px;

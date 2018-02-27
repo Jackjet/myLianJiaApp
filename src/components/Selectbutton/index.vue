@@ -131,7 +131,7 @@
            obj[queryType] = tem
            this.temp.push(obj)
          }else{
-           // 找到所在obj
+           // 找到所在obj1
            const inserIndex = this.findIndexByQueryTypeInTemp(queryType)
            this.temp[inserIndex][queryType].push(item)
          }
