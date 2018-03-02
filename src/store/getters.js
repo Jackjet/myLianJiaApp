@@ -7,10 +7,13 @@ const getters = {
 
   /*查询面板子项展开状态维护*/
   showmask: state => state.app.showmaskOntab,
-  selectItem: state => state.app.selectItem,
   showtabcontainer: state => state.app.showtabcontainer,
-  comfirmTag: state => state.app.comfirmTag,
-  roomTabQueryItem: state => state.app.roomTabQueryItem,
+
+  selectItem: state => state.busines.selectItem,
+  comfirmTag: state => state.busines.comfirmTag,
+  totalQuerl: state => state.busines.totalQuerl,
+  roomTabQueryItem: state => state.busines.roomTabQueryItem,
   searchlist: state => state.busines.searchHistory
+
 }
 export default getters

@@ -54,6 +54,8 @@
 
   import {zoneSearch,ditieSearch,detailZoneSearch} from '@/api/remoteSearch'
   import { mapMutations } from 'vuex'
+
+  import { checkIsSaveType } from '@/utils/index'
   export default {
   name:'',
   components:{
@@ -148,6 +150,12 @@
          this.zoneT = item
          this.saveSelectItemId('')
          this.selected = ''
+
+    /*     const stateTotal = this.$store.getters.totalQuerl
+
+         if(!this.checkIsSaveType(stateTotal,'zone')){
+
+         }*/
        }else{
          Toast('请选择有效的信息！');
        }

@@ -29,7 +29,7 @@
   import {hasClass,toggleClass,removeClass} from '@/utils/dom'
   import Pricerange from '@/components/Selectbutton/Pricerange'
 
-  import { mapMutations } from 'vuex'
+  import { mapMutations,mapActions } from 'vuex'
   export default {
   name:'',
   components:{
@@ -63,6 +63,7 @@
        buttonselectFlag:0,//价格标签是否有被选中的，以便和价格范围联动
        buttonObj:{},
        priceObj:{},
+       totalQuerl:[],
        pobj:{},
        temp:[
     /*     {'price':['10万一下','20万一下']},
@@ -82,12 +83,15 @@
        selectItemInState:'SELECTITEMID',
        saveQueryItem:'SAVEIROOMTABQUERYITEM'
      }),
+     ...mapActions({
+       saveTotalQuery:'saveTotalQuery'
+     }),
      //是否已经存储过查询类型
      // 实现思路，先确定返回的temp的数据结构（模拟）
      //遍历里面的数据结构（键名）
-     checkIsSaveType(queryType){
+     checkIsSaveType(sourceArray,queryType){
        let flag = false
-       this.temp.forEach((obj)=>{
+       sourceArray.forEach((obj)=>{
          for(let key in obj){
           if(key.indexOf(queryType) < 0){
             return
@@ -124,7 +128,7 @@
      },
      addSelectData(e,item,queryType){
        if(hasClass(e.target,'active')){
-         if(!this.checkIsSaveType(queryType)){
+         if(!this.checkIsSaveType(this.temp,queryType)){
            let obj = new Object();
            let tem = []
            tem.push(item)
@@ -138,7 +142,7 @@
        }
      },
      deletData(e,item,queryType){
-       if( !hasClass(e.target,'active') && this.checkIsSaveType(queryType)){
+       if( !hasClass(e.target,'active') && this.checkIsSaveType(this.temp,queryType)){
          const inserIndex = this.findIndexByQueryTypeInTemp(queryType)
          const deletIndex = this.temp[inserIndex][queryType].findIndex(innerItem=>{
            return item === innerItem
@@ -159,13 +163,14 @@
        }
        this.priceObj[key] =  this.pobj
 
-       if(!this.checkIsSaveType(key) ){
+       if(!this.checkIsSaveType(this.temp,key) ){
          this.temp.push(this.priceObj)
        }
      },
      confirmHander(){
        this.checkWhoIsBig = this.checkWhoIsBig+1
        if(!(this.temp.length === 0)){
+
          this.$emit("selectQuery",this.temp)
        }else{
          this.noQuery()
@@ -173,9 +178,24 @@
        //展开项关闭
        this.selectItemInState('')
        //存储条件
-     //  console.log(this.temp)
+       //console.log(this.temp)
+       this.getAllQuery()
        this.saveQueryItem(this.temp)
+      // this.saveTotalQuery(this.temp)
        // 存储查询动作，以便watch条件变化（hack方法，有待改进）
+     },
+     getAllQuery(){
+       const stateTotal = this.$store.getters.totalQuerl
+       this.temp.forEach((item)=>{
+         let type = Object.keys(item)
+         if(!this.checkIsSaveType(stateTotal,type)){
+           // 每个组件都有自己独立的作用域，所以需要借用state状态树
+           //统一维护，而不是单单的totalQuerl
+           //this.totalQuerl.push(16)
+           this.saveTotalQuery(item)
+         }
+       })
+       console.log( stateTotal)
      },
      clearQuery(){
        const items =this.$refs.item
