@@ -18,6 +18,7 @@ Mock.mock(/\/search\/byquery/, 'get', roomAPI.searchRoomByQuery)
 Mock.mock(/\/search\/refresh/, 'get', roomAPI.refresh)
 Mock.mock(/\/search\/allroom/, 'get', roomAPI.getAllRoomList)
 Mock.mock(/\/search\/cardinfo/, 'get', roomAPI.getCardInfo)
+Mock.mock(/\/search\/housedetail/, 'get', roomAPI.getHouseDetail)
 
 //查询面板
 Mock.mock(/\/search\/zone/, 'get', remoteSearchAPI.searchZone)

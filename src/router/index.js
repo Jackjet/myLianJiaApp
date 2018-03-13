@@ -46,6 +46,12 @@ export const constantRouterMap = [
     meta: { title: 'searchlist'}
   },
   {
+    path: '/detail/:id',
+    name: 'detail',
+    component: () => import('@/views/detail/index'),
+    meta: { title: 'detail'}
+  },
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',

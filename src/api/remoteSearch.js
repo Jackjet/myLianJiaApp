@@ -35,3 +35,10 @@ export function moreQuerySearch(query) {
     params: query
   })
 }
+export function getHouseDetai(query) {
+  return request({
+    url: '/search/housedetail',
+    method: 'get',
+    params: { query }
+  })
+}

@@ -12,31 +12,33 @@
    </div>
    <!--//无限滚动-->
    <div class="list">
-     <div class="list-item" v-for="(item,index) in dataList" :key="index">
-       <div class="img">
-         <img v-lazy="item.img" >
-       </div>
-       <div class="list-info">
-         <header class="header">
-           {{item.title}}
-         </header>
-         <span class="sub-titile">
+     <div  v-for="(item,index) in dataList" :key="index">
+       <router-link class="list-item" :to="{ name: 'detail', params: { id: item.id }}">
+         <div class="img">
+           <img v-lazy="item.img" >
+         </div>
+         <div class="list-info">
+           <header class="header">
+             {{item.title}}
+           </header>
+           <span class="sub-titile">
            {{item.subtitile}}
          </span>
-         <div class="btn-groups">
-           <sbadege size="small" type="error" v-if="item.tag.full">满5年</sbadege>
-           <sbadege size="small" type="success" v-if="item.tag.randomTime">随时可看</sbadege>
-           <sbadege size="small" v-if="item.tag.trace">地铁</sbadege>
-         </div>
-         <div class="zj-warpper">
+           <div class="btn-groups">
+             <sbadege size="small" type="error" v-if="item.tag.full">满5年</sbadege>
+             <sbadege size="small" type="success" v-if="item.tag.randomTime">随时可看</sbadege>
+             <sbadege size="small" v-if="item.tag.trace">地铁</sbadege>
+           </div>
+           <div class="zj-warpper">
            <span class="zujin">
            {{item.totalPrice}}
          </span>
-           <span class="mianji">
+             <span class="mianji">
            {{item.price}}
          </span>
+           </div>
          </div>
-       </div>
+       </router-link>
      </div>
    </div>
  </div>

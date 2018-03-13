@@ -45,3 +45,9 @@
   opacity: $num;
   background-color:$color;
 }
+@mixin flex-box(){
+  display: flex;
+}
+@mixin flex-item(){
+   flex: 1;
+}

@@ -22,6 +22,8 @@ for (let i = 0; i < count; i++) {
       "二手房",
       "租房"
     ],
+    squerySize:'@natural(66, 166)'+'m²',
+    roomType:'@natural(1, 5)'+'室'+'@natural(1, 2)'+'厅',
     totalPrice:'@natural(66, 388)'+'万',
     price:'@natural(3666, 9888)'+'元/平',
     id: '@increment',
@@ -55,6 +57,13 @@ export default {
       return true
     })
     return { items: tempList }
+  },
+  getHouseDetail:config => {
+    const searchItem  = param2Obj(config.url)
+    const temp = mockList.filter(item => {
+     return item.id === parseInt(searchItem.query)
+    })
+    return { item: temp }
   },
   getAllRoomList: () => {
      return { items: mockList }
