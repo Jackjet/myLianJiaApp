@@ -31,7 +31,71 @@
          </div>
          <div class="flex-item">
            <span class="list-title">挂牌:</span>
-           <span class="list-item-info">{{houseItem.price}}</span>
+           <span class="list-item-info">{{houseItem.guapai}}</span>
+         </div>
+       </div>
+       <div class="content-list flex-box">
+         <div class="flex-item">
+           <span class="list-title">朝向:</span>
+           <span class="list-item-info">{{houseItem.chaoxiang}}</span>
+         </div>
+         <div class="flex-item">
+           <span class="list-title">楼层:</span>
+           <span class="list-item-info">{{houseItem.louchen}}</span>
+         </div>
+       </div>
+       <div class="content-list flex-box">
+         <div class="flex-item">
+           <span class="list-title">楼型:</span>
+           <span class="list-item-info">{{houseItem.louxing}}</span>
+         </div>
+         <div class="flex-item">
+           <span class="list-title">电梯:</span>
+           <span class="list-item-info">{{houseItem.dianti}}</span>
+         </div>
+        </div>
+       <div class="content-list flex-box">
+         <div class="flex-item">
+           <span class="list-title">装修:</span>
+           <span class="list-item-info">{{houseItem.zhuangxiu}}</span>
+         </div>
+         <div class="flex-item">
+           <span class="list-title">年代:</span>
+           <span class="list-item-info">{{houseItem.niandai}}</span>
+         </div>
+       </div>
+       <div class="content-list flex-box">
+         <div class="flex-item">
+           <span class="list-title">用途:</span>
+           <span class="list-item-info">{{houseItem.yongtu}}</span>
+         </div>
+         <div class="flex-item">
+           <span class="list-title">权属:</span>
+           <span class="list-item-info">{{houseItem.quanshu}}</span>
+         </div>
+       </div>
+       <div class="content-list">
+         <div class="single-item">
+           <span class="list-title">房源编码:</span>
+           <span class="list-item-info">{{houseItem.fangyuanbianma}}</span>
+         </div>
+       </div>
+       <div class="content-list">
+         <div class="single-item">
+           <span class="list-title">有效期:</span>
+           <span class="list-item-info">{{houseItem.youxiaoqi}}</span>
+         </div>
+       </div>
+       <div class="content-list">
+         <div class="single-item">
+           <span class="list-title">首付预算:</span>
+           <span class="list-item-info">{{houseItem.shoufuyusuan}}</span>
+         </div>
+       </div>
+       <div class="content-list">
+         <div class="single-item">
+           <span class="list-title">小区:</span>
+           <span class="list-item-info">{{houseItem.xiaoqu}}</span>
          </div>
        </div>
      </div>
@@ -128,18 +192,23 @@
   .item-property{
     border-right:1px solid $line;
   }
-
-  .content-list{
-    .list-title{
-      display: inline;
-      padding: 5px 0;
-      color:$text2;
-      font-size: $font-size-medium;
-    }
-    .list-item-info{
-      display: inline-block;
-      color:$black;
-      font-size: $font-size-large;
+  .house-info-detail{
+    .content-list{
+      font-size: 0;
+      padding:8px 0;
+      .list-title{
+        display: inline;
+        padding: 5px 0;
+        color:$text2;
+        font-size: $font-size-medium;
+      }
+      .list-item-info{
+        display: inline-block;
+        margin-left: 5px;
+        color:$black;
+        font-size: $font-size-medium-x;
+      }
     }
   }
+
 </style>

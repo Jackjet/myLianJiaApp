@@ -26,6 +26,23 @@ for (let i = 0; i < count; i++) {
     roomType:'@natural(1, 5)'+'室'+'@natural(1, 2)'+'厅',
     totalPrice:'@natural(66, 388)'+'万',
     price:'@natural(3666, 9888)'+'元/平',
+    guapai:'@date()',
+    "chaoxiang|1":[
+      '朝东', '朝西', '朝南', '朝北'
+    ],
+    louchen:'@natural(1, 26)'+'层',
+    louxing:'楼型描述',
+    "dianti|1":[
+      '有', '无'
+    ],
+    zhuangxiu:'其它',
+    niandai:'@date()',
+    yongtu:'普通住宅',
+    quanshu:'商品房',
+    fangyuanbianma:'@string(9, 10)',
+    youxiaoqi:'@date()'+'-'+'@date()',
+    shoufuyusuan:'首付预算及贷款情况咨询经纪人',
+    xiaoqu:'@ctitle(6, 8)',
     id: '@increment',
     img:"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3739955964,2895168016&fm=27&gp=0.jpg",
     data:'@county',
