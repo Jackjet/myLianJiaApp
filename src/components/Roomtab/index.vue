@@ -55,7 +55,7 @@
   import {zoneSearch,ditieSearch,detailZoneSearch} from '@/api/remoteSearch'
   import { mapMutations } from 'vuex'
 
-  import { checkIsSaveType } from '@/utils/index'
+  import { checkIsSaveType,findIndexByQueryTypeInTemp } from '@/utils/index'
   export default {
   name:'',
   components:{
@@ -85,8 +85,12 @@
          line:'',
          detailzone:'',
        },
+       zoneInfo:{
+         zoneInfo:''
+       },
        lastSelectQueryItem:''
      }
+
    },
    created(){
      this.searchZone()
@@ -114,7 +118,8 @@
        changeShowMask: 'SHOWMASK',
        changeShowTab: 'SHOWTAB',
        saveItemIds:'SAVEITEMIDS',
-       selectItem:'SELECTITEMID'
+       selectItem:'SELECTITEMID',
+       saveTotalQuery:'SALVETOTALQUERY'
      }),
      // 子项展开与否
      selectItemHander(){
@@ -151,6 +156,9 @@
          this.saveSelectItemId('')
          this.selected = ''
 
+         this.saveZoneOrLineInfoToState().then(()=>{
+           this.showAllQueryToUser()
+         })
     /*     const stateTotal = this.$store.getters.totalQuerl
 
          if(!this.checkIsSaveType(stateTotal,'zone')){
@@ -225,6 +233,29 @@
            this.priceT = obj.priceType
          }
        }*/
+     },
+     // 存储地区地铁信息进state中
+     saveZoneOrLineInfoToState(){
+       return new Promise((resolve, reject)=>{
+         this.zoneInfo.zoneInfo = this.queryList
+         // 目的是保持各个条件数据结构一致
+         let temp = []
+         temp.push(this.zoneInfo)
+         this.saveTotalQuery(temp)
+         resolve()
+       })
+
+     },
+     showAllQueryToUser(){
+       const stateTotal = this.$store.getters.totalQuerl
+       let temp = []
+       stateTotal.forEach((queryItem)=>{
+         temp.push(Object.values(queryItem))
+       })
+       Toast({
+         message: temp,
+         duration: 5000
+       });
      }
    },
     watch:{
@@ -269,6 +300,8 @@
         if(this.lastSelectQueryItem){
           this.loadQueryOnTab(this.lastSelectQueryItem)
         }
+        // 显示具体地区和地铁条件信息
+        this.showAllQueryToUser()
       }
     }
   }

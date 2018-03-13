@@ -103,3 +103,10 @@ priceRang组件
 
 实现查询面板条件反馈显示
 其中价格区间范围选择存在只选一个显示两个bug
+
+实现所有选择条件集中到一起进行管理
+
+
+https://github.com/crazygit/debugging-vue
+webstorm 断点调试vue
+http://www.bkjia.com/Javascript/1214578.html

@@ -1,6 +1,15 @@
 import {saveSearch,loadSearch,deleteSearch,clearSearch} from '@/utils/cache'
-import {checkIsSaveType,findIndexByQueryTypeInTemp} from '@/utils/index'
-let total = []
+import {checkIsSaveType,findIndexByQueryType} from '@/utils/index'
+
+function addItem(stateTotal,singleItem) {
+  let type = Object.keys(singleItem)
+  if(!(checkIsSaveType(stateTotal,type))){
+    stateTotal.push(singleItem)
+  }else{
+    const inserIndex = findIndexByQueryType(stateTotal,type)
+    stateTotal[inserIndex] = singleItem
+  }
+}
 const busines = {
   state: {
     searchHistory: loadSearch(),
@@ -26,8 +35,31 @@ const busines = {
       state.selectItem = id
     },
     SALVETOTALQUERY:(state,item)=>{
-      state.totalQuerl.push(item)
+      const stateTotal = state.totalQuerl
+      if(stateTotal.length === 0){
+        if(item.length ===1){
+          stateTotal.push(item[0])
+        }else {
+          //首次就选择多条件
+          item.forEach((singleItem)=>{
+            addItem(stateTotal,singleItem)
+          })
+        }
+
+      }else{
+          // 当为单一的组别条件时候
+          if(item.length ===1){
+            addItem(stateTotal,item[0])
+         }else{
+            item.forEach((singleItem)=>{
+              addItem(stateTotal,singleItem)
+            })
+          }
+    }
     },
+    changeQueryByIndex:(state,index,item)=>{
+      state.totalQuerl[index] = item
+    }
   },
   actions: {
     saveSearchHistory({commit}, query) {

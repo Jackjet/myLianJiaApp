@@ -62,7 +62,6 @@
     Searchlist,
     roomlist,
     Roomtab,
-
    },
     props:{
       placeholder: {
@@ -90,6 +89,7 @@
     textDom.style.cssText ='color:#898a8c;font-size:14px';
    },
    computed: {
+
    },
    methods: {
      selectZoneT(q){

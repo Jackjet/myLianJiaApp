@@ -80,18 +80,28 @@ export function formatTime(time, option) {
 export function checkIsSaveType(sourceArray,queryType) {
   let flag = false
   sourceArray.forEach((obj)=>{
-    for(let key in obj){
-      if(key.indexOf(queryType) < 0){
-        return
-      }else{
-        flag = true
+      for(let key in obj){
+        if(key.indexOf(queryType) < 0){
+          return
+        }else{
+          flag = true
+        }
       }
-    }
   })
   return flag
 }
 
 export function findIndexByQueryTypeInTemp(sourceArray,queryType) {
+  const findIndex =  sourceArray.findIndex((obj)=>{
+    for(let key in obj){
+      if(key.indexOf(queryType) > -1 ){
+        return true
+      }
+    }
+  })
+  return  findIndex
+}
+export function findIndexByQueryType(sourceArray,queryType) {
   const findIndex =  sourceArray.findIndex((obj)=>{
     for(let key in obj){
       if(key.indexOf(queryType) > -1 ){

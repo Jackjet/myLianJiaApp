@@ -28,8 +28,8 @@
 <script type="text/ecmascript-6">
   import {hasClass,toggleClass,removeClass} from '@/utils/dom'
   import Pricerange from '@/components/Selectbutton/Pricerange'
-
   import { mapMutations,mapActions } from 'vuex'
+  import { findIndexByQueryType } from '@/utils/index'
   export default {
   name:'',
   components:{
@@ -81,7 +81,8 @@
    methods: {
      ...mapMutations({
        selectItemInState:'SELECTITEMID',
-       saveQueryItem:'SAVEIROOMTABQUERYITEM'
+       saveQueryItem:'SAVEIROOMTABQUERYITEM',
+       changeQueryByIndex:'changeQueryByIndex'
      }),
      ...mapActions({
        saveTotalQuery:'saveTotalQuery'
@@ -179,12 +180,12 @@
        this.selectItemInState('')
        //存储条件
        //console.log(this.temp)
-       this.getAllQuery()
        this.saveQueryItem(this.temp)
-      // this.saveTotalQuery(this.temp)
+
+       this.saveTotalQuery(this.temp)
        // 存储查询动作，以便watch条件变化（hack方法，有待改进）
      },
-     getAllQuery(){
+     /*getAllQuery(){
        const stateTotal = this.$store.getters.totalQuerl
        this.temp.forEach((item)=>{
          let type = Object.keys(item)
@@ -193,10 +194,16 @@
            //统一维护，而不是单单的totalQuerl
            //this.totalQuerl.push(16)
            this.saveTotalQuery(item)
+         }else{
+
+           const inserIndex = findIndexByQueryType(stateTotal,type)
+           console.log(inserIndex)
+           //this.changeQueryByIndex(inserIndex,item)
+
          }
        })
-       console.log( stateTotal)
-     },
+       /!*console.log( stateTotal)*!/
+     },*/
      clearQuery(){
        const items =this.$refs.item
        for(let i=0;i<items.length;i++){
