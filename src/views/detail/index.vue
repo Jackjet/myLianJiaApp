@@ -99,15 +99,57 @@
          </div>
        </div>
      </div>
+     <div class="more-info">
+       更多房源信息
+     </div>
+     <div class="hxgj-wrapper">
+       <span class="title">户型格局</span>
+       <div class="hxgj flex-box">
+         <div class="flex-item">
+           <div class="hxgj-info">
+             <div class="info-item">
+               客厅:35.8m²/南北/落地窗
+             </div>
+             <div class="info-item">
+               卧室A:13.8m²/北/落地窗
+             </div>
+             <div class="info-item">
+               卧室B:13.2m²/北/落地窗
+             </div>
+           </div>
+         </div>
+         <div class="flex-item">
+           <img class="hxgj-img" v-lazy="huxingurl" >
+         </div>
+       </div>
+     </div>
    </div>
- </div>
+   <div class="house-map">
+     <el-amap vid="amapDemo" :zoom="zoom" :center="center" class="amap-demo">
+     <el-amap-circle v-for="(circle,index) in circles" :center="circle.center" :key="index" :radius="circle.radius" :fill-opacity="circle.fillOpacity" :events="circle.events"></el-amap-circle>
+       <el-amap-info-window
+         :position="currentWindow.position"
+         :visible="currentWindow.visible"
+         :events="currentWindow.events"
+         :size="currentWindow.size"
+       >
+         <div :style="slotStyle">
+           {{ mapLocation }}
+         </div>
+       </el-amap-info-window>
+     </el-amap>
+   </div>
+   </div>
 </template>
 
 <script type="text/ecmascript-6">
   const  url1='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520933055025&di=c21cf0eab87a2cfba7c088d44ef4548f&imgtype=0&src=http%3A%2F%2Fpic.tugou.com%2FDT%2F1456967467_358787.jpg'
   const  url2='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520933055025&di=1aaa26427e991df50961694f91e7abdc&imgtype=0&src=http%3A%2F%2Fimg.taopic.com%2Fuploads%2Fallimg%2F110317%2F119-11031F3193493.jpg'
   const url3='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520933055024&di=1a5981007320f2137819b9b82185532f&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F37d3d539b6003af36dd1134d3e2ac65c1038b6b0.jpg'
+  const url4 = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521002951324&di=1ed452e118748ac03b88592f15d3ab10&imgtype=0&src=http%3A%2F%2Fimgs.focus.cn%2Fupload%2Fjiangmen%2F26770%2Fa_267697773.jpg'
   import {getHouseDetai} from '@/api/remoteSearch'
+
+
   export default {
   name:'',
   components:{
@@ -116,19 +158,56 @@
      return{
       houseId:'',
       houseItem:'',
+      mapLocation:'华师啊！',
+      huxingurl:url4,
+       markers: [],
        dataList:[
          {url:url1},
          {url:url2},
          {url:url3},
-       ]
+       ],
+       slotStyle: {
+         color: '#333',
+         fontSize:'16px',
+         fontWeight:'blod'
+       },
+       zoom: 12,
+       center: [121.5273285, 31.21515044],
+       circles: [
+         {
+           center: [121.5273285, 31.21515044],
+           radius: 150,
+           fillOpacity: 0.5,
+           events: {
+             click: () => {
+               alert('click');
+             }
+           }
+         }
+       ],
+       currentWindow:
+          {
+           position: [121.5273285, 31.21515044],
+           size:[120,50],
+           template: `<div :style="slotStyle" class="map-location">{{ mapLocation }}</div>`,
+           visible: true,
+           events: {
+             close() {
+               console.log('close infowindow2');
+             }
+           }
+         }
+
      }
+
    },
    created(){
 
     this.houseId = this.$route.params.id
-    this.getHouseDetai(this.houseId)
+
    },
    mounted(){
+     this.getHouseDetai(this.houseId)
    },
    computed: {
    },
@@ -136,9 +215,12 @@
      getHouseDetai(id){
        getHouseDetai(id).then(res=>{
           this.houseItem = res.data.item[0]
+          this.mapLocation = this.houseItem.xiaoqu
        })
-     }
+     },
+
    }
+
   }
 </script>
 <style scoped lang="scss" rel="stylesheet/scss">
@@ -177,6 +259,33 @@
       color:$red;
       font-size: $font-size-large;
     }
+    .hxgj-wrapper{
+      font-size: 0;
+      padding:10px 0;
+      border-top:1px solid $line;
+      .title{
+        padding:0;
+        font-size: $font-size-medium;
+        color:$black
+      }
+    }
+    .hxgj{
+
+      .hxgj-info{
+        font-size: $font-size-medium;
+        color:$text
+      }
+      .hxgj-img{
+        width: 100%;
+        height: 1.5rem;
+      }
+      .info-item{
+         margin:5px 0;
+       }
+      .info-item:first-child{
+        margin:0;
+      }
+    }
   }
   .flex-box{
     @include flex-box();
@@ -209,6 +318,22 @@
         font-size: $font-size-medium-x;
       }
     }
-  }
 
+  }
+  .more-info{
+    padding:12px 0;
+    margin:10px 0;
+    text-align: center;
+    color: $blue;
+    background: $line;
+    font-size: $font-size-medium-x;
+  }
+  .house-map{
+    width: 100%;
+    height: 4rem;
+  }
+  .map-location{
+    font-size: $font-size-medium;
+    color: $black;
+  }
 </style>

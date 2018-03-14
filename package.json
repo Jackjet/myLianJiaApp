@@ -15,17 +15,18 @@
   "dependencies": {
     "axios": "0.17.1",
     "element-ui": "2.0.8",
+    "good-storage": "^1.0.1",
     "js-cookie": "2.2.0",
     "mint-ui": "^2.2.13",
     "normalize.css": "7.0.0",
     "nprogress": "0.2.0",
     "vue": "2.5.10",
+    "vue-amap": "^0.5.3",
     "vue-awesome": "^2.3.4",
     "vue-awesome-swiper": "^2.6.7",
     "vue-router": "3.0.1",
     "vue-ydui": "^0.9.6",
-    "vuex": "3.0.1",
-    "good-storage": "^1.0.1"
+    "vuex": "3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "7.2.3",

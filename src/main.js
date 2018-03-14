@@ -31,6 +31,15 @@ import '@/permission' // permission control
 
 import './mock'
 
+import VueAMap from 'vue-amap';
+Vue.use(VueAMap);
+VueAMap.initAMapApiLoader({
+  key: '02a6681dcdc026d8d3988309d90c214',
+  plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor'],
+  // 默认高德 sdk 版本为 1.4.4
+  v: '1.4.4'
+});
+
 Vue.use(ElementUI, { locale })
 Vue.component('icon', Icon)
 

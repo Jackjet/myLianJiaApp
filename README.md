@@ -110,3 +110,6 @@ priceRang组件
 https://github.com/crazygit/debugging-vue
 webstorm 断点调试vue
 http://www.bkjia.com/Javascript/1214578.html
+
+加入高德地图组件
+http://lbs.amap.com/dev/key/app
