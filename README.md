@@ -112,4 +112,5 @@ webstorm 断点调试vue
 http://www.bkjia.com/Javascript/1214578.html
 
 加入高德地图组件
+https://elemefe.github.io/vue-amap/#/zh-cn/windows/info-window
 http://lbs.amap.com/dev/key/app

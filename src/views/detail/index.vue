@@ -1,5 +1,5 @@
 <template>
- <div class="home-detail">
+ <div class="home-detail" >
    <div class="swipe-wrapper">
      <mt-swipe :show-indicators="false" :auto="0">
        <mt-swipe-item v-for="(item,index) in dataList" :key="index">
@@ -139,6 +139,54 @@
        </el-amap-info-window>
      </el-amap>
    </div>
+   <div class="sub-detail">
+     <div class="house-introduce mycell-wrapper" >
+       <mt-cell ref="mycell"
+                title="房源介绍"
+                to="//github.com"
+                is-link
+       >
+       </mt-cell>
+     </div>
+     <div class="jjr-fankui mycell-wrapper">
+       <mt-cell ref="mycell2" title="经纪人带看" label="2018.03.11"  :to="{ name: 'houseintroduce' }">
+         <img class="avarter" v-lazy="jjravart">
+       </mt-cell>
+     </div>
+     <div class="fydt">
+       <div class="title">房源动态</div>
+       <div class="fydtflex flex-box">
+         <div class="flex-item">
+           <div class="title">近7日带看(次)</div>
+           <div class="info">6</div>
+         </div>
+         <div class="flex-item">
+           <div class="title">近30日带看(次)</div>
+           <div class="info">16</div>
+         </div>
+         <div class="flex-item">
+           <div class="title">关注房源(人)</div>
+           <div class="info">26</div>
+         </div>
+       </div>
+       <div class="sub-fydt">
+         <mt-cell ref="mycell3"
+                  title="带看记录"
+                  to="//github.com"
+                  is-link
+         >
+           <span>最近带看2018.03.15</span>
+         </mt-cell>
+         <mt-cell ref="mycell4"
+                  title="房源时间轴"
+                  to="//github.com"
+                  is-link
+         >
+           <span>挂牌时间2018.03.15</span>
+         </mt-cell>
+       </div>
+     </div>
+   </div>
    </div>
 </template>
 
@@ -147,6 +195,7 @@
   const  url2='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520933055025&di=1aaa26427e991df50961694f91e7abdc&imgtype=0&src=http%3A%2F%2Fimg.taopic.com%2Fuploads%2Fallimg%2F110317%2F119-11031F3193493.jpg'
   const url3='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520933055024&di=1a5981007320f2137819b9b82185532f&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F37d3d539b6003af36dd1134d3e2ac65c1038b6b0.jpg'
   const url4 = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521002951324&di=1ed452e118748ac03b88592f15d3ab10&imgtype=0&src=http%3A%2F%2Fimgs.focus.cn%2Fupload%2Fjiangmen%2F26770%2Fa_267697773.jpg'
+
   import {getHouseDetai} from '@/api/remoteSearch'
 
 
@@ -156,6 +205,7 @@
    },
   data(){
      return{
+      jjravart:'http://img1.imgtn.bdimg.com/it/u=2564480903,531105440&fm=11&gp=0.jpg',
       houseId:'',
       houseItem:'',
       mapLocation:'华师啊！',
@@ -208,6 +258,11 @@
    },
    mounted(){
      this.getHouseDetai(this.houseId)
+     console.log(this.$refs.mycell.$el.children[2])
+     this.initCellCss(this.$refs.mycell.$el.children[2])
+     this.initCellCss(this.$refs.mycell2.$el.children[1])
+     this.initCellCss(this.$refs.mycell3.$el.children[2])
+     this.initCellCss(this.$refs.mycell4.$el.children[2])
    },
    computed: {
    },
@@ -218,7 +273,9 @@
           this.mapLocation = this.houseItem.xiaoqu
        })
      },
-
+    initCellCss(dom){
+      dom.style.backgroundImage = 'none'
+    }
    }
 
   }
@@ -270,7 +327,6 @@
       }
     }
     .hxgj{
-
       .hxgj-info{
         font-size: $font-size-medium;
         color:$text
@@ -335,5 +391,52 @@
   .map-location{
     font-size: $font-size-medium;
     color: $black;
+  }
+  .jjr-fankui{
+    .avarter{
+      width:32px;
+      height: 32px;
+      border-radius: 16px;
+    }
+  }
+  .mint-cell:last-child,.mint-cell-wrapper {
+     padding:10px 0;
+     background-image: none !important;
+  }
+  .mint-cell:last-child{
+    .mint-cell-wrapper{
+      background-image: none !important;
+    }
+  }
+
+  .sub-detail{
+    background: $line;
+    .mint-cell{
+      padding:8px 0;
+      border-top: 1px solid $line;
+    }
+  }
+  .fydt{
+    padding:0 10px;
+    background: $color-white;
+    margin-top: 15px;
+    & >.title{
+      padding:10px 0;
+      font-size: $font-size-large;
+    }
+    .mint-cell:last-child,.mint-cell-wrapper {
+      background-image: none !important;
+    }
+    .fydtflex{
+      .title{
+        font-size: $font-size-small;
+        color: $text;
+      }
+      .info{
+        margin:5px 0 10px 10px;
+        font-size: $font-size-large-x;
+      }
+
+    }
   }
 </style>
