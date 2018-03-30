@@ -45,6 +45,7 @@ export const constantRouterMap = [
     component: () => import('@/views/querylist/index'),
     meta: { title: 'querylist'}
   },
+
   {
     path: '/searchlist',
     name: 'searchlist',
@@ -55,7 +56,15 @@ export const constantRouterMap = [
     path: '/detail/:id',
     name: 'detail',
     component: () => import('@/views/detail/index'),
-    meta: { title: 'detail'}
+    meta: { title: 'detail'},
+    children: [
+      {
+        path: 'erji',
+        name: 'erji',
+        component: () => import('@/views/erji/index'),
+        meta: { title: 'erji'}
+      },
+    ]
   },
   {
     path: '/example',

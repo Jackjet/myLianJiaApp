@@ -14,7 +14,7 @@ $bg-grey:#f8f8f8;
 $bg-dark:#e8e8e8;
 $black: #282828;
 $bg-grey2:lighten($black,10%);
-
+$info:#5bc0de;
 $text:#c2c2c2;
 $text2:#898a8c;
 $line:#F0F0F0;
@@ -30,6 +30,7 @@ $font-size-medium:14px;
 $font-size-medium-x:16px;
 $font-size-large:18px;
 $font-size-large-x:22px;
+$font-size-large-l:30px;
 
 @media (-webkit-device-pixel-ratio:1.5),(min-device-pixel-ratio: 1.5){
   .border-1px{

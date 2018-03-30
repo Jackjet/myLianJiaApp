@@ -1,5 +1,6 @@
 <template>
  <div class="home-detail" >
+   <topheader ref="topheader" @duibi="duibi" @info="info" @share="share" :opacitys="thePercent"></topheader>
    <div class="swipe-wrapper">
      <mt-swipe :show-indicators="false" :auto="0">
        <mt-swipe-item v-for="(item,index) in dataList" :key="index">
@@ -187,6 +188,14 @@
        </div>
      </div>
    </div>
+   <div class="bottom-popup">
+     <mt-popup style="width: 100%" v-model="popupVisible" position="bottom" class="mint-popup-4">
+       <share @cancle="cancle"></share>
+     </mt-popup>
+   </div>
+   <transition name="fade" mode="out-in">
+     <router-view></router-view>
+   </transition>
    </div>
 </template>
 
@@ -195,23 +204,28 @@
   const  url2='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520933055025&di=1aaa26427e991df50961694f91e7abdc&imgtype=0&src=http%3A%2F%2Fimg.taopic.com%2Fuploads%2Fallimg%2F110317%2F119-11031F3193493.jpg'
   const url3='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520933055024&di=1a5981007320f2137819b9b82185532f&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F37d3d539b6003af36dd1134d3e2ac65c1038b6b0.jpg'
   const url4 = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521002951324&di=1ed452e118748ac03b88592f15d3ab10&imgtype=0&src=http%3A%2F%2Fimgs.focus.cn%2Fupload%2Fjiangmen%2F26770%2Fa_267697773.jpg'
-
+  const headerH = 40;
   import {getHouseDetai} from '@/api/remoteSearch'
-
-
+  import Topheader from '@/components/Topheader'
+  import Share from '@/components/Share'
   export default {
   name:'',
   components:{
+    Topheader,
+    Share
    },
   data(){
      return{
+      actions: [],
+      popupVisible:false,
       jjravart:'http://img1.imgtn.bdimg.com/it/u=2564480903,531105440&fm=11&gp=0.jpg',
       houseId:'',
       houseItem:'',
+      thePercent:1,
       mapLocation:'华师啊！',
       huxingurl:url4,
-       markers: [],
-       dataList:[
+      markers: [],
+      dataList:[
          {url:url1},
          {url:url2},
          {url:url3},
@@ -252,9 +266,7 @@
 
    },
    created(){
-
     this.houseId = this.$route.params.id
-
    },
    mounted(){
      this.getHouseDetai(this.houseId)
@@ -263,6 +275,14 @@
      this.initCellCss(this.$refs.mycell2.$el.children[1])
      this.initCellCss(this.$refs.mycell3.$el.children[2])
      this.initCellCss(this.$refs.mycell4.$el.children[2])
+     this.actions = [{
+       name: '拍照',
+       method: this.takePhoto
+     }, {
+       name: '从相册中选择',
+       method: this.openAlbum
+     }];
+     this.onWindowScroll()
    },
    computed: {
    },
@@ -275,9 +295,41 @@
      },
     initCellCss(dom){
       dom.style.backgroundImage = 'none'
-    }
-   }
+    },
+     takePhoto() {
+       console.log('taking photo');
+     },
 
+     openAlbum() {
+       console.log('opening album');
+     },
+     duibi(){
+       this.$router.push({ name: 'erji', params: { houseId: this.houseId }})
+     },
+     info(){
+       this.duibi()
+     },
+     share(){
+       this.popupVisible = true
+     },
+     cancle(){
+       this.popupVisible = false
+     },
+     onWindowScroll(){
+       let that = this
+       // 坑！！！！！ window对象里面的this 是指向window啊
+       window.onscroll = function(){
+         let t = document.documentElement.scrollTop || document.body.scrollTop;
+         let percent = headerH / t
+
+         if(percent>=0.1 && percent <=1){
+           that.thePercent = Math.min(percent,0.5)
+         }else if(percent>1){
+           that.thePercent =  1
+         }
+       }
+     }
+   }
   }
 </script>
 <style scoped lang="scss" rel="stylesheet/scss">
