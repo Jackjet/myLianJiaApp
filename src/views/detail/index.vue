@@ -270,7 +270,6 @@
    },
    mounted(){
      this.getHouseDetai(this.houseId)
-     console.log(this.$refs.mycell.$el.children[2])
      this.initCellCss(this.$refs.mycell.$el.children[2])
      this.initCellCss(this.$refs.mycell2.$el.children[1])
      this.initCellCss(this.$refs.mycell3.$el.children[2])
@@ -335,6 +334,7 @@
 <style scoped lang="scss" rel="stylesheet/scss">
   @import '../../styles/variables.scss';
   @import '../../styles/mixin.scss';
+  @import '../../styles/transition.scss';
   .swipe-wrapper{
     height:5rem;
   }

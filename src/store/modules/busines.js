@@ -12,6 +12,7 @@ function addItem(stateTotal,singleItem) {
 }
 const busines = {
   state: {
+    locationcity:'',
     searchHistory: loadSearch(),
     selectItem:'',
     roomTabQueryItem:[],
@@ -22,6 +23,9 @@ const busines = {
 
     SET_SEARCH_HISTORY: (state,history) => {
       state.searchHistory = history
+    },
+    SET_LOCATION_CITY: (state,city) => {
+      state.locationcity = city
     },
     SAVEIROOMTABQUERYITEM:(state,q)=>{
       //传过来的条件都是单一的obj条件

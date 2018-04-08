@@ -114,3 +114,6 @@ http://www.bkjia.com/Javascript/1214578.html
 加入高德地图组件
 https://elemefe.github.io/vue-amap/#/zh-cn/windows/info-window
 http://lbs.amap.com/dev/key/app
+
+utils分享工具导航组件
+// detail页面里面坑！！！！！ window对象里面的this 是指向window!可以使用箭头函数优化避免 window.onscroll = function(){this}

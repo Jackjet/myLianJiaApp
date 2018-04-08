@@ -1,9 +1,11 @@
 <template>
  <div class="search-wrapper">
    <div class="search-location" v-if="showLocation">
-     <div class="location" >
+     <div>
+       <router-link tag="div" class="location" to="/cityindex">
        <div class="item">{{location}}</div>
        <div class="item-icon"><icon name="caret-down"></icon></div>
+       </router-link>
      </div>
    </div>
    <div class="search-location" v-if="showHouseType">
@@ -19,17 +21,33 @@
        </div>
      </mt-popup>
    </div>
-   <div class="search-item" ref="searchcom">
-     <mt-search @input=listnerInput  v-model="value" :result.sync="result" placeholder="你想住在哪?(北上广深)" >
-       <mt-cell @click.native="selectResultItem(item)"
-         v-for="item in result"
-         :title="item.discription"
-         :value="item.num"
-         is-link
-         :key="item.id"
-       >
-       </mt-cell>
-     </mt-search>
+   <router-link tag="div" class="search-item"  to="/searchlist" v-if="showLocation">
+       <div  ref="searchcom">
+         <mt-search @input=listnerInput  v-model="value" :result.sync="result" placeholder="你想住在哪?(北上广深)" >
+           <mt-cell @click.native="selectResultItem(item)"
+             v-for="item in result"
+             :title="item.discription"
+             :value="item.num"
+             is-link
+             :key="item.id"
+           >
+           </mt-cell>
+         </mt-search>
+       </div>
+   </router-link>
+   <div class="search-item" v-if="showHouseType">
+     <div ref="searchcom">
+       <mt-search @input=listnerInput  v-model="value" :result.sync="result" placeholder="你想住在哪?(北上广深)" >
+         <mt-cell @click.native="selectResultItem(item)"
+                  v-for="item in result"
+                  :title="item.discription"
+                  :value="item.num"
+                  is-link
+                  :key="item.id"
+         >
+         </mt-cell>
+       </mt-search>
+     </div>
    </div>
  </div>
 </template>
@@ -189,6 +207,7 @@
     }
   }
   .search-item{
-    flex: 1;
+    flex:0 0 1;
+    width: 100%;
   }
 </style>

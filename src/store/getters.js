@@ -9,6 +9,7 @@ const getters = {
   showmask: state => state.app.showmaskOntab,
   showtabcontainer: state => state.app.showtabcontainer,
 
+  locationcity: state => state.busines.locationcity,
   selectItem: state => state.busines.selectItem,
   comfirmTag: state => state.busines.comfirmTag,
   totalQuerl: state => state.busines.totalQuerl,

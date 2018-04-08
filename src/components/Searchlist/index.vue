@@ -1,7 +1,7 @@
 <template>
  <div class="wrapper">
    <div class="search">
-       <search @keySearchWord2="keySearchWord2"  @input=listnerInput :result=searchtResult @cancelSearch="cancelSearch"  :showHouseType=true :houseTypes=houseTypes @selectResultItem="selectResultItem"></search>
+       <search @keySearchWord2="keySearchWord2"  @input=listnerInput :result=searchtResult @cancelSearch="cancelSearch"  :showHouseType=true :houseTypes=houseTypes @selectResultItem="selectResultItem" :location="location"></search>
    </div>
    <div class="history-list-wrapper" v-show="showhistorylist">
      <historylist :searches="searches" @deleteAll="deleteAll" @delete="deleteOne" @select="selectItem"></historylist>
@@ -23,6 +23,12 @@
     Historylist,
     search
    },
+    props:{
+      location:{
+        type:String,
+        default:'广州'
+      }
+    },
   data(){
      return{
        searchtResult:[],

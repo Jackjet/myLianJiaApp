@@ -40,6 +40,12 @@ export const constantRouterMap = [
     meta: { title: 'querylist'}
   },
   {
+    path: '/cityindex',
+    name: 'cityindex',
+    component: () => import('@/views/cityindex/index'),
+    meta: { title: 'cityindex'}
+  },
+  {
     path: '/houseintroduce',
     name: 'houseintroduce',
     component: () => import('@/views/querylist/index'),
@@ -65,6 +71,12 @@ export const constantRouterMap = [
         meta: { title: 'erji'}
       },
     ]
+  },
+  {
+    path: '/myerji',
+    name: 'myerji',
+    component: () => import('@/views/erji/index'),
+    meta: { title: 'myerji'}
   },
   {
     path: '/example',

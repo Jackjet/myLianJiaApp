@@ -3,9 +3,7 @@
     <mt-tab-container v-model="selected">
       <mt-tab-container-item id="首页">
         <div class="h-serch"  ref="searchCom" :style="{paddingLeft:paddingLeft + 'px',paddingRight: paddingLeft + 'px',top:searchTop + 'rem'}">
-          <router-link to="/searchlist">
-            <search :showLocation=true></search>
-          </router-link>
+          <search :showLocation=true :location="locationcity || '广州'"></search>
         </div>
         <div class="banner">
           <mt-swipe :auto="3000">
@@ -71,16 +69,10 @@
         </div>
       </mt-tab-container-item>
       <mt-tab-container-item id="消息">
-        222
-      </mt-tab-container-item>
-      <mt-tab-container-item id="发现">
-        333
-      </mt-tab-container-item>
-      <mt-tab-container-item id="看房">
-        444
+        <message></message>
       </mt-tab-container-item>
       <mt-tab-container-item id="我的">
-        555
+        <my></my>
       </mt-tab-container-item>
     </mt-tab-container>
     <div class="footer">
@@ -92,14 +84,6 @@
         <mt-tab-item id="消息">
           <icon name="info-circle" slot="icon"></icon>
           消息
-        </mt-tab-item>
-        <mt-tab-item id="发现">
-          <icon name="compass" slot="icon"></icon>
-          发现
-        </mt-tab-item>
-        <mt-tab-item id="看房">
-          <icon name="institution" slot="icon"></icon>
-          看房
         </mt-tab-item>
         <mt-tab-item id="我的">
           <icon name="user" slot="icon"></icon>
@@ -116,12 +100,15 @@
 <script type="text/ecmascript-6">
 import swiper from '@/components/swiper'
 import CardInfo from '@/components/cardinfo'
+import my from '@/views/my'
+import message from '@/views/message'
 import huodong from '@/views/sales'
 import HotSale from '@/views/sales/salespromotion/hotsales'
 import InfoDetail from '@/views/infodetail'
 import roomlist from '@/views/roomlist'
 import search from '@/components/search'
 
+import { mapGetters } from 'vuex'
 import {citySearch} from '@/api/remoteSearch'
 
 import {roomSearch,AllRoomList,cardInfoApi} from '@/api/room'
@@ -136,7 +123,9 @@ import {debounce} from '@/utils/index'
     InfoDetail,
     CardInfo,
     roomlist,
-    search
+    search,
+    my,
+    message
    },
   data(){
      return{
@@ -179,6 +168,9 @@ import {debounce} from '@/utils/index'
 
    },
    computed: {
+     ...mapGetters([
+       'locationcity',
+     ])
    },
    methods: {
      scroll() {
@@ -243,6 +235,7 @@ import {debounce} from '@/utils/index'
 </script>
 <style scoped lang="scss" rel="stylesheet/scss">
   @import '../../styles/variables.scss';
+  @import '../../styles/transition.scss';
   /*.img-wrapper{
     padding:5px;
     border:1px solid rgba(226, 226, 226, 0.38);

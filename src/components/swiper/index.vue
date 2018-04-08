@@ -1,6 +1,7 @@
 <template>
   <swiper :options="swiperOption"  ref="mySwiper"  class="swiper-container">
-    <swiper-slide v-for="(slide,index) in swiperSlides" :key="index"  class="swiper-slide link-container">
+    <swiper-slide v-for="(slide,index) in swiperSlides" :key="index"  class="swiper-slide ">
+      <router-link tag="div" to="/myerji" class="link-container">
       <div class="item-link">
         <icon name="home" class="ershoufang"></icon>
         <span class="link-title">二手房</span>
@@ -33,6 +34,7 @@
         <icon name="delicious"  class="xq"></icon>
         <span class="link-title">小区</span>
       </div>
+      </router-link>
       </swiper-slide>
     <div class="swiper-pagination swiper-pagination-center" slot="pagination"></div>
   </swiper>
@@ -118,5 +120,9 @@
       font-size: 14px;
       margin-top: -0.2rem;
     }
+  }
+  .swiper-pagination-center{
+    z-index: 0;
+    height: 30px;
   }
 </style>

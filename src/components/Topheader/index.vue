@@ -1,6 +1,6 @@
 <template>
  <div class="header-wrapper">
-   <mt-header fixed :title=title  v-bind:style="{ opacity: opacitys }" >
+   <mt-header :fixed="fixed" :title=title  v-bind:style="{ opacity: opacitys }" >
      <a class="go-back" @click="goBack" slot="left" >
        <mt-button icon="back"></mt-button>
      </a>
@@ -26,6 +26,10 @@
       type:Boolean,
       default:true
     },
+    fixed:{
+        type:Boolean,
+        default:true
+      },
      title:{
       type:String,
       default:''

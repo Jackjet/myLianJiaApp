@@ -1,8 +1,8 @@
 <template>
   <div class="login-container">
+    <img src="../../assets/logo6.png">
     <el-form autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left" label-width="0px"
       class="card-box login-form">
-      <h3 class="title">vue-element-admin</h3>
       <el-form-item prop="username">
         <span class="svg-container svg-container_login">
           <svg-icon icon-class="user" />
@@ -19,12 +19,12 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" style="width:100%;" :loading="loading" @click.native.prevent="handleLogin">
-          Sign in
+          登  录
         </el-button>
       </el-form-item>
       <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: admin</span>
+        <span style="margin-right:20px;">账号: admin</span>
+        <span> 密码: admin</span>
       </div>
     </el-form>
   </div>
@@ -92,12 +92,17 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-  @import "src/styles/mixin.scss";
+  @import "../../styles/mixin.scss";
   $bg:#2d3a4b;
   $dark_gray:#889aa4;
   $light_gray:#eee;
 
   .login-container {
+    text-align: center;
+    img{
+      position: relative;
+      top:1.5rem;
+    }
     @include relative;
     height: 100vh;
     background-color: $bg;
@@ -146,9 +151,8 @@ export default {
       position: absolute;
       left: 0;
       right: 0;
-      width: 400px;
       padding: 35px 35px 15px 35px;
-      margin: 120px auto;
+      margin: 70px auto;
     }
     .el-form-item {
       border: 1px solid rgba(255, 255, 255, 0.1);
